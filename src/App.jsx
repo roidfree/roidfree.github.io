@@ -2,13 +2,13 @@ import { useState, useEffect } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import './App.css';
-import Header from './components/Header/Header';
-import Hero from './components/Hero/Hero';
-import About from './components/About/About';
-import Skills from './components/Skills/Skills';
-import Projects from './components/Projects/Projects';
-import Contact from './components/Contact/Contact';
-import Footer from './components/Footer/Footer';
+import Header from './components/00_Header/Header';
+import Hero from './components/01_Hero/Hero';
+import About from './components/02_About/About';
+import Skills from './components/03_Skills/Skills';
+import Projects from './components/04_Projects/Projects';
+import Contact from './components/05_Contact/Contact';
+import Footer from './components/06_Footer/Footer';
 
 function App() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -29,7 +29,7 @@ function App() {
         <main>
           <Hero id="home" />
           <About id="about" />
-          <Skills id="skills" />
+          {/* <Skills id="skills" /> */}
           <Projects id="projects" />
           <Contact id="contact" />
         </main>
