@@ -1,13 +1,26 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { FaCode, FaServer, FaMobile } from 'react-icons/fa';
+import { FaBrain, FaVideo, FaLightbulb } from 'react-icons/fa';
+import brainImage from '../../assets/images/brain.png';
 import './about.css';
 
 const About = () => {
   const skills = [
-    { name: 'Frontend Development', icon: <FaCode />, description: 'Building responsive and interactive user interfaces with React, Vue, and modern CSS.' },
-    { name: 'Backend Development', icon: <FaServer />, description: 'Creating robust server-side applications with Node.js, Express, and various databases.' },
-    { name: 'Mobile Development', icon: <FaMobile />, description: 'Developing cross-platform mobile applications using React Native and Flutter.' },
+    { 
+      name: 'Neurotechnology', 
+      icon: <FaBrain />, 
+      description: 'Researching and developing brain-computer interfaces (BCIs) and EEG-based wearables for health monitoring and cognitive enhancement.' 
+    },
+    { 
+      name: 'Videography & Storytelling', 
+      icon: <FaVideo />, 
+      description: 'Creating compelling visual narratives that communicate complex ideas and inspire meaningful action.' 
+    },
+    { 
+      name: 'Behavioral Science', 
+      icon: <FaLightbulb />, 
+      description: 'Applying insights from psychology and neuroscience to bridge the gap between intention and action in everyday life.' 
+    },
   ];
 
   return (
@@ -20,20 +33,31 @@ const About = () => {
           transition={{ duration: 0.6 }}
           className="about-content"
         >
+          <motion.div 
+            className="about-image-container"
+            initial={{ opacity: 0, scale: 0.8 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
+            <img src={brainImage} alt="Neurotechnology" className="about-image" />
+          </motion.div>
           <div className="about-text">
             <h2>About Me</h2>
             <p>
-              Hello! I'm [Your Name], a passionate software developer with a love for creating beautiful and functional web applications.
-              With over [X] years of experience in the industry, I've had the opportunity to work on a variety of projects,
-              from small business websites to large-scale enterprise applications.
+              Hello! I'm Dameer Ahmed, a Biomedical Technology student at Imperial College London, specializing in neurotechnology 
+              and brain-computer interfaces (BCIs). As a Sanofi Scholar and founder of Imperial's Neurotechnology Society, 
+              I combine engineering precision, neuroscience insights, and human-centered design in my research and projects.
             </p>
             <p>
-              My journey in web development started [X] years ago when I built my first website. Since then, I've been
-              constantly learning and expanding my skills to stay up-to-date with the latest technologies and best practices.
+              My technical work spans from developing EEG brain-health wearables to creating automated laboratory systems. 
+              I'm passionate about building technology that enhances human potential and improves quality of life through 
+              direct brain-computer interaction.
             </p>
             <p>
-              When I'm not coding, you can find me [your hobbies/interests], [another interest], or [one more interest].
-              I'm always open to new opportunities and interesting projects, so feel free to get in touch!
+              Beyond my academic pursuits, I'm deeply interested in videography, storytelling, and applying behavioral science 
+              to help people lead more fulfilling lives. I focus specifically on bridging the gap between intention and action—helping 
+              people translate their goals into consistent behaviors through insights from psychology and neuroscience.
             </p>
           </div>
           

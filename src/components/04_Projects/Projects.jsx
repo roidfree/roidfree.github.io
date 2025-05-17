@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { FiGithub, FiExternalLink } from 'react-icons/fi';
-import { FaReact, FaNodeJs, FaPython, FaVuejs, FaLaravel } from 'react-icons/fa';
-import { SiTypescript, SiNextdotjs, SiDjango, SiGraphql } from 'react-icons/si';
+import { FaPython, FaReact } from 'react-icons/fa';
+import { SiTensorflow, SiArduino, SiRaspberrypi } from 'react-icons/si';
+import { TbBrain, TbDeviceWatchStats, TbMicroscope } from 'react-icons/tb';
 import './Projects.css';
 
 const Projects = () => {
@@ -11,67 +12,67 @@ const Projects = () => {
   const projects = [
     {
       id: 1,
-      title: 'E-commerce Platform',
-      description: 'A full-stack e-commerce platform with user authentication, product catalog, shopping cart, and payment integration.',
-      tags: ['React', 'Node.js', 'MongoDB', 'Express', 'Redux'],
-      image: 'https://via.placeholder.com/600x400/3a86ff/ffffff?text=E-commerce',
+      title: 'EEG Brain-health Patch',
+      description: 'An innovative wearable EEG device for continuous brain health monitoring. Imperial Faculty of Natural Sciences finalist project.',
+      tags: ['EEG', 'Machine Learning', 'Hardware', 'Signal Processing'],
+      image: 'https://via.placeholder.com/600x400/3a86ff/ffffff?text=EEG+Brain-health+Patch',
       github: '#',
       demo: '#',
-      category: 'Full Stack'
+      category: 'Neurotechnology'
     },
     {
       id: 2,
-      title: 'Task Management App',
-      description: 'A task management application with drag-and-drop functionality, task categories, and team collaboration features.',
-      tags: ['React', 'TypeScript', 'Firebase', 'Material-UI'],
-      image: 'https://via.placeholder.com/600x400/8338ec/ffffff?text=Task+App',
+      title: 'Hackstarter EEG Prototype',
+      description: 'A focus-tracking wearable device using EEG signals and machine learning algorithms to optimize cognitive performance.',
+      tags: ['EEG', 'TensorFlow', 'Python', 'Embedded Systems'],
+      image: 'https://via.placeholder.com/600x400/8338ec/ffffff?text=Hackstarter+EEG',
       github: '#',
       demo: '#',
-      category: 'Frontend'
+      category: 'Neurotechnology'
     },
     {
       id: 3,
-      title: 'RESTful API Service',
-      description: 'A scalable RESTful API service with authentication, rate limiting, and comprehensive documentation.',
-      tags: ['Node.js', 'Express', 'MongoDB', 'JWT', 'Swagger'],
-      image: 'https://via.placeholder.com/600x400/ff006e/ffffff?text=API+Service',
+      title: 'Automated Cell Culture System',
+      description: 'A robotic system for automating laboratory cell culture processes, increasing efficiency and reducing human error.',
+      tags: ['Robotics', 'Python', 'Arduino', 'Lab Automation'],
+      image: 'https://via.placeholder.com/600x400/ff006e/ffffff?text=Cell+Culture+System',
       github: '#',
       demo: '#',
-      category: 'Backend'
+      category: 'Research'
     },
     {
       id: 4,
-      title: 'Portfolio Website',
-      description: 'A personal portfolio website built with React and Framer Motion for smooth animations and transitions.',
-      tags: ['React', 'Framer Motion', 'Styled Components', 'Responsive Design'],
-      image: 'https://via.placeholder.com/600x400/ffbe0b/ffffff?text=Portfolio',
+      title: 'Neurofeedback Training Platform',
+      description: 'An interactive platform that provides real-time feedback on brain activity to help users improve focus and cognitive performance.',
+      tags: ['React', 'Python', 'EEG', 'Real-time Processing'],
+      image: 'https://via.placeholder.com/600x400/ffbe0b/ffffff?text=Neurofeedback+Platform',
       github: '#',
       demo: '#',
-      category: 'Frontend'
+      category: 'Neurotechnology'
     },
     {
       id: 5,
-      title: 'Real-time Chat Application',
-      description: 'A real-time chat application with private messaging, group chats, and read receipts.',
-      tags: ['React', 'Node.js', 'Socket.io', 'MongoDB'],
-      image: 'https://via.placeholder.com/600x400/fb5607/ffffff?text=Chat+App',
+      title: 'Intention-Action Gap Analysis Tool',
+      description: 'A research tool that analyzes behavioral patterns to identify gaps between stated intentions and actual actions.',
+      tags: ['Data Analysis', 'Psychology', 'Python', 'Visualization'],
+      image: 'https://via.placeholder.com/600x400/fb5607/ffffff?text=Intention-Action+Tool',
       github: '#',
       demo: '#',
-      category: 'Full Stack'
+      category: 'Behavioral Science'
     },
     {
       id: 6,
-      title: 'Data Visualization Dashboard',
-      description: 'An interactive dashboard for data visualization with various chart types and data filtering options.',
-      tags: ['React', 'D3.js', 'Redux', 'Material-UI'],
-      image: 'https://via.placeholder.com/600x400/8338ec/ffffff?text=Dashboard',
+      title: 'Neurotech Educational Platform',
+      description: 'An interactive educational platform for the Imperial Neurotechnology Society to introduce students to BCI concepts and applications.',
+      tags: ['React', 'Educational', 'Interactive', 'Neuroscience'],
+      image: 'https://via.placeholder.com/600x400/8338ec/ffffff?text=Educational+Platform',
       github: '#',
       demo: '#',
-      category: 'Frontend'
+      category: 'Education'
     },
   ];
 
-  const categories = ['All', 'Frontend', 'Backend', 'Full Stack'];
+  const categories = ['All', 'Neurotechnology', 'Research', 'Behavioral Science', 'Education'];
 
   const filteredProjects = activeFilter === 'All' 
     ? projects 
@@ -81,22 +82,20 @@ const Projects = () => {
     switch(tech.toLowerCase()) {
       case 'react':
         return <FaReact className="tech-icon" />;
-      case 'node.js':
-        return <FaNodeJs className="tech-icon" />;
-      case 'typescript':
-        return <SiTypescript className="tech-icon" />;
-      case 'next.js':
-        return <SiNextdotjs className="tech-icon" />;
       case 'python':
         return <FaPython className="tech-icon" />;
-      case 'django':
-        return <SiDjango className="tech-icon" />;
-      case 'vue':
-        return <FaVuejs className="tech-icon" />;
-      case 'laravel':
-        return <FaLaravel className="tech-icon" />;
-      case 'graphql':
-        return <SiGraphql className="tech-icon" />;
+      case 'tensorflow':
+        return <SiTensorflow className="tech-icon" />;
+      case 'arduino':
+        return <SiArduino className="tech-icon" />;
+      case 'raspberry pi':
+        return <SiRaspberrypi className="tech-icon" />;
+      case 'eeg':
+        return <TbBrain className="tech-icon" />;
+      case 'wearable':
+        return <TbDeviceWatchStats className="tech-icon" />;
+      case 'lab automation':
+        return <TbMicroscope className="tech-icon" />;
       default:
         return null;
     }
@@ -114,7 +113,7 @@ const Projects = () => {
         >
           <h2>My Projects</h2>
           <p className="projects-intro">
-            Here are some of my recent projects. Each project was built to solve a specific problem or explore new technologies.
+            Here are some of my key projects in neurotechnology, research, and behavioral science. Each project represents my commitment to enhancing human potential through technology and understanding.
           </p>
 
           <div className="project-filters">

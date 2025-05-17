@@ -1,14 +1,17 @@
 import { motion } from 'framer-motion';
-import { FaGithub, FaLinkedin, FaInstagram } from 'react-icons/fa';
+import { FaGithub, FaLinkedin, FaInstagram, FaThreads } from 'react-icons/fa6';
 import { HiOutlineMail } from 'react-icons/hi';
 import { TypeAnimation } from 'react-type-animation';
+import profilePhoto from '../../assets/images/profile photo.jpg';
+import heroBackground from '../../assets/images/Adobe Express - file.jpg';
 
 const Hero = () => {
   const socialLinks = [
-    { icon: <FaGithub />, url: 'https://github.com/yourusername' },
-    { icon: <FaLinkedin />, url: 'https://linkedin.com/in/yourusername' },
-    { icon: <FaInstagram />, url: 'https://threads.net/yourusername', title: 'Threads' },
-    { icon: <HiOutlineMail />, url: 'mailto:your.email@example.com' },
+    { icon: <FaGithub />, url: 'https://github.com/roidfree', title: 'GitHub' },
+    { icon: <FaLinkedin />, url: 'https://linkedin.com/in/dameerahmed', title: 'LinkedIn' },
+    { icon: <FaInstagram />, url: 'https://instagram.com/dameerahmed', title: 'Instagram' },
+    { icon: <FaThreads />, url: 'https://threads.net/@dameerahmed', title: 'Threads' },
+    { icon: <HiOutlineMail />, url: 'mailto:dameer.ahmed@imperial.ac.uk', title: 'Email' },
   ];
 
   return (
@@ -34,8 +37,8 @@ const Hero = () => {
             />
           </h2>
           <p className="hero-description">
-            I build exceptional digital experiences with modern web technologies.
-            Currently focused on creating beautiful, responsive, and user-friendly applications.
+            Biomedical Technology student at Imperial College London, specializing in neurotechnology and brain-computer interfaces.
+            Bridging the gap between intention and action through engineering, neuroscience, and human-centered design.
           </p>
           <div className="hero-cta">
             <a href="#contact" className="btn mr-4">
@@ -52,7 +55,7 @@ const Hero = () => {
                 href={link.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label={`Social Link ${index + 1}`}
+                aria-label={link.title}
                 className="social-link"
               >
                 {link.icon}
