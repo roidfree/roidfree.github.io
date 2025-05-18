@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import './App.css';
@@ -7,11 +7,24 @@ import Hero from './components/01_Hero/Hero';
 import About from './components/02_About/About';
 import Projects from './components/04_Projects/Projects';
 import Contact from './components/05_Contact/Contact';
-import NeurotechUnplugged from './components/07_NeurotechUnplugged/NeurotechUnplugged';
 import Footer from './components/06_Footer/Footer';
+import NeurotechUnpluggedPage from './pages/NeurotechUnpluggedPage';
+
+// Store the current location in a ref to prevent infinite re-renders
+const useLocationRef = () => {
+  const location = useLocation();
+  const locationRef = useRef(location);
+  
+  useEffect(() => {
+    locationRef.current = location;
+  }, [location]);
+  
+  return locationRef;
+};
 
 function App() {
   const [isScrolled, setIsScrolled] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -21,8 +34,6 @@ function App() {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-
-  const location = useLocation();
 
   useEffect(() => {
     // Handle hash-based navigation
@@ -42,6 +53,7 @@ function App() {
       setTimeout(handleHashChange, 100);
     }
 
+
     // Add event listener for hash changes
     window.addEventListener('hashchange', handleHashChange);
     return () => window.removeEventListener('hashchange', handleHashChange);
@@ -58,20 +70,16 @@ function App() {
 
   return (
     <div className="app">
-      <Header isScrolled={isScrolled} />
+      {location.pathname !== '/neurotech-unplugged' && <Header isScrolled={isScrolled} />}
       <main>
         <AnimatePresence mode="wait">
           <Routes location={location} key={location.pathname}>
-            <Route path="/neurotech-unplugged" element={
-              <div className="neurotech-page">
-                <NeurotechUnplugged />
-              </div>
-            } />
+            <Route path="/neurotech-unplugged" element={<NeurotechUnpluggedPage />} />
             <Route path="/" element={<Home />} />
           </Routes>
         </AnimatePresence>
       </main>
-      <Footer />
+      {location.pathname !== '/neurotech-unplugged' && <Footer />}
     </div>
   );
 }
