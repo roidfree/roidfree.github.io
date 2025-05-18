@@ -76,6 +76,7 @@ function App() {
         <AnimatePresence mode="wait">
           <Routes location={location} key={location.pathname}>
             <Route path="/neurotech-unplugged" element={<NeurotechUnpluggedPage />} />
+            <Route path="/ana-proj" element={<ANAProj />} />
             <Route path="/" element={<Home />} />
           </Routes>
         </AnimatePresence>
