@@ -4,6 +4,7 @@ import { FiGithub, FiExternalLink } from 'react-icons/fi';
 import { FaPython, FaReact } from 'react-icons/fa';
 import { SiTensorflow, SiArduino, SiRaspberrypi } from 'react-icons/si';
 import { TbBrain, TbDeviceWatchStats, TbMicroscope } from 'react-icons/tb';
+import { Link } from 'react-router-dom';
 import './Projects.css';
 
 const Projects = () => {
@@ -15,18 +16,18 @@ const Projects = () => {
       title: 'EEG Brain-health Patch',
       description: 'An innovative wearable EEG device for continuous brain health monitoring. Imperial Faculty of Natural Sciences finalist project.',
       tags: ['EEG', 'Machine Learning', 'Hardware', 'Signal Processing'],
-      image: 'https://via.placeholder.com/600x400/3a86ff/ffffff?text=EEG+Brain-health+Patch',
+      image: 'src/assets/images/Introducing ANA.png',
       github: '#',
-      demo: '#',
-      category: 'Neurotechnology'
+      demo: '/ana-proj',
+      category: 'Neurotechnology',
     },
     {
       id: 2,
       title: 'Hackstarter EEG Prototype',
       description: 'A focus-tracking wearable device using EEG signals and machine learning algorithms to optimize cognitive performance.',
       tags: ['EEG', 'TensorFlow', 'Python', 'Embedded Systems'],
-      image: 'https://via.placeholder.com/600x400/8338ec/ffffff?text=Hackstarter+EEG',
-      github: '#',
+      image: 'src/assets/images/hackstarter.jpg',
+      github: 'https://github.com/roidfree/focus-classifier',
       demo: '#',
       category: 'Neurotechnology'
     },

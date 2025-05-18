@@ -9,6 +9,7 @@ import Projects from './components/04_Projects/Projects';
 import Contact from './components/05_Contact/Contact';
 import Footer from './components/06_Footer/Footer';
 import NeurotechUnpluggedPage from './pages/NeurotechUnpluggedPage';
+import ANAProj from './pages/ANA-Proj';
 
 // Store the current location in a ref to prevent infinite re-renders
 const useLocationRef = () => {
