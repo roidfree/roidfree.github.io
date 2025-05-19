@@ -9,6 +9,10 @@
   color: #fff;
   padding: 100px 0 50px; /* Add more top padding to ensure content is below header */
   box-sizing: border-box;
+  /* background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('../assets/images/Introducing ANA.png'); */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 main {

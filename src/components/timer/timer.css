@@ -16,11 +16,11 @@
   justify-content: center;
   background: rgba(0, 0, 0, 0.4);
   padding: 3% 4%;
-  border-radius: 8px;
+  /* border-radius: 8px; */
   width: 90%;
   max-width: 1000px;
-  box-shadow: 0 0 30px rgba(75, 108, 183, 0.2);
-  border: 1px solid rgba(75, 108, 183, 0.1);
+  /* box-shadow: 0 0 30px rgba(75, 108, 183, 0.2); */
+  /* border: 1px solid rgba(75, 108, 183, 0.1); */
 }
 
 .timer-unit {
