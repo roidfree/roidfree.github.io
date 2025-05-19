@@ -4,11 +4,20 @@ import './ANA-Proj.css'; // Import the CSS file
 
 const ANAProj = () => (
   <div className="ana-proj">
-    <main>
-      {/* <h1>ANA - Advanced Neural Adhesive</h1> */}
-      <Timer targetDate={new Date('2025-05-21T00:00:00')} />
-      {/* <h2> Coming soon... </h2> */}
-    </main>
+    <div className="ana-content">
+      <div className="ana-header">
+        <h1 className="ana-title">ANA - Advanced Neural Adhesive</h1>
+        <p className="ana-subtitle">Student led-project trying to create skin-wearable technology for brain health</p>
+      </div>
+      
+      <div className="ana-timer-section">
+        <Timer targetDate={new Date('2025-05-21T00:00:00')} />
+      </div>
+      
+      <div className="ana-footer">
+        <h2 className="ana-coming-soon">Update coming soon</h2>
+      </div>
+    </div>
   </div>
 );
 

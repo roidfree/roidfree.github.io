@@ -3,24 +3,24 @@
   text-align: center;
   font-family: 'Orbitron', sans-serif;
   font-weight: 700;
-  width: 75vw;
-  height: 75vh;
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 1rem;
 }
 
 .timer-container {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #000;
-  padding: 2% 3%;
-  border-radius: 5px;
-  width: 75%;
-  height: auto;
+  background: rgba(0, 0, 0, 0.4);
+  padding: 3% 4%;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 1000px;
+  box-shadow: 0 0 30px rgba(75, 108, 183, 0.2);
+  border: 1px solid rgba(75, 108, 183, 0.1);
 }
 
 .timer-unit {
@@ -33,25 +33,29 @@
 
 .timer-value {
   color: #fff;
-  font-size: clamp(2rem, 10vw, 12rem);
+  font-size: clamp(2.5rem, 9vw, 11rem);
   letter-spacing: 2px;
   line-height: 1;
+  text-shadow: 0 0 10px rgba(75, 108, 183, 0.6);
 }
 
 .timer-label {
   color: #fff;
-  font-size: clamp(0.6rem, 2vw, 1.5rem);
+  font-size: clamp(0.7rem, 1.5vw, 1.3rem);
   letter-spacing: 1px;
   margin-top: 0.5rem;
   opacity: 0.8;
+  text-transform: uppercase;
 }
 
 .timer-separator {
   color: #fff;
-  font-size: clamp(2rem, 10vw, 12rem);
+  font-size: clamp(2.5rem, 9vw, 11rem);
   margin: 0 0.25rem;
-  padding-bottom: 1.5rem;
+  padding-bottom: 1.25rem;
   line-height: 1;
+  opacity: 0.8;
+  text-shadow: 0 0 10px rgba(75, 108, 183, 0.4);
 }
 
 .sr-only {
@@ -67,25 +71,16 @@
 
 /* Media queries for responsiveness */
 @media (max-width: 1100px) {
-  .timer-wrapper {
-    width: 85vw;
-    height: 85vh;
-  }
-  
   .timer-container {
-    width: 85%;
+    width: 95%;
+    padding: 2.5% 3.5%;
   }
 }
 
 @media (max-width: 768px) {
-  .timer-wrapper {
-    width: 90vw;
-    height: 90vh;
-  }
-  
   .timer-container {
-    width: 90%;
-    padding: 1.5% 2%;
+    width: 98%;
+    padding: 2% 3%;
   }
   
   .timer-unit {
@@ -95,16 +90,32 @@
   .timer-separator {
     margin: 0 0.1rem;
   }
+  
+  .timer-value {
+    font-size: clamp(2rem, 8vw, 9rem);
+  }
+  
+  .timer-separator {
+    font-size: clamp(2rem, 8vw, 9rem);
+  }
 }
 
 @media (max-width: 576px) {
-  .timer-wrapper {
-    width: 95vw;
-    height: 95vh;
+  .timer-container {
+    width: 100%;
+    padding: 1.5% 2%;
   }
   
-  .timer-container {
-    width: 95%;
-    padding: 1%;
+  .timer-value {
+    font-size: clamp(1.8rem, 7vw, 8rem);
+  }
+  
+  .timer-separator {
+    font-size: clamp(1.8rem, 7vw, 8rem);
+    padding-bottom: 1rem;
+  }
+  
+  .timer-label {
+    font-size: clamp(0.6rem, 1.2vw, 1rem);
   }
 } 

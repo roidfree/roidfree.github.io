@@ -1,10 +1,14 @@
-.ana-proj  {
-  min-height: 100vh;
-  min-width: 100vw;
+.ana-proj {
+  min-height: calc(100vh - 150px); /* Account for header and footer */
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  background-color: #000;
+  color: #fff;
+  padding: 100px 0 50px; /* Add more top padding to ensure content is below header */
+  box-sizing: border-box;
 }
 
 main {
@@ -12,7 +16,90 @@ main {
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: 100%;
   flex: 1;
-  padding: 0;
+  padding: 2rem 0;
+}
+
+.ana-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  gap: 1.5rem; /* Moderate spacing between elements */
+}
+
+/* Top section with title and subtitle */
+.ana-header {
+  margin-bottom: 1rem;
+}
+
+.ana-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(90deg, #4b6cb7 0%, #182848 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.ana-subtitle {
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  opacity: 0.8;
+  max-width: 600px;
+}
+
+/* Timer section - main focus */
+.ana-timer-section {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem 0;
+  flex: 1;
+}
+
+/* Footer section with coming soon text */
+.ana-footer {
+  margin-top: 1rem;
+}
+
+.ana-coming-soon {
+  font-family: 'Orbitron', sans-serif;
+  font-size: clamp(1.2rem, 3vw, 2rem);
+  padding: 0.5rem 2rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  background-color: rgba(0, 0, 0, 0.5);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+@media (max-width: 768px) {
+  .ana-proj {
+    padding: 80px 0 30px; /* Adjusted padding for mobile */
+  }
+  
+  .ana-content {
+    gap: 1rem;
+  }
+  
+  .ana-header {
+    margin-bottom: 0.5rem;
+  }
+  
+  .ana-timer-section {
+    padding: 1rem 0;
+  }
+  
+  .ana-footer {
+    margin-top: 0.5rem;
+  }
 }
