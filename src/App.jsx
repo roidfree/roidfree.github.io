@@ -54,7 +54,6 @@ function App() {
       setTimeout(handleHashChange, 100);
     }
 
-
     // Add event listener for hash changes
     window.addEventListener('hashchange', handleHashChange);
     return () => window.removeEventListener('hashchange', handleHashChange);
