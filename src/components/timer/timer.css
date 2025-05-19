@@ -12,14 +12,46 @@
   padding: 1rem;
 }
 
-.timer-display {
-  display: inline-block;
+.timer-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background: #000;
-  color: #fff;
-  padding: 0.5rem 1rem;
+  padding: 2% 3%;
   border-radius: 5px;
-  font-size: clamp(2rem, 5vw, 4rem);
+  width: 75%;
+  height: auto;
+}
+
+.timer-unit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 0.5rem;
+  flex: 1;
+}
+
+.timer-value {
+  color: #fff;
+  font-size: clamp(2rem, 10vw, 12rem);
   letter-spacing: 2px;
+  line-height: 1;
+}
+
+.timer-label {
+  color: #fff;
+  font-size: clamp(0.6rem, 2vw, 1.5rem);
+  letter-spacing: 1px;
+  margin-top: 0.5rem;
+  opacity: 0.8;
+}
+
+.timer-separator {
+  color: #fff;
+  font-size: clamp(2rem, 10vw, 12rem);
+  margin: 0 0.25rem;
+  padding-bottom: 1.5rem;
+  line-height: 1;
 }
 
 .sr-only {
@@ -39,6 +71,10 @@
     width: 85vw;
     height: 85vh;
   }
+  
+  .timer-container {
+    width: 85%;
+  }
 }
 
 @media (max-width: 768px) {
@@ -46,11 +82,29 @@
     width: 90vw;
     height: 90vh;
   }
+  
+  .timer-container {
+    width: 90%;
+    padding: 1.5% 2%;
+  }
+  
+  .timer-unit {
+    margin: 0 0.25rem;
+  }
+  
+  .timer-separator {
+    margin: 0 0.1rem;
+  }
 }
 
 @media (max-width: 576px) {
   .timer-wrapper {
     width: 95vw;
     height: 95vh;
+  }
+  
+  .timer-container {
+    width: 95%;
+    padding: 1%;
   }
 } 

@@ -33,11 +33,26 @@ const Timer = ({ targetDate = new Date('2025-05-30T00:00:00') }) => {
       <span className="sr-only">
         {`${days} days, ${hours} hours, ${minutes} minutes, ${seconds} seconds`}
       </span>
-      <div className="timer-display">
-        {days.toString().padStart(2, '0')}:
-        {hours.toString().padStart(2, '0')}:
-        {minutes.toString().padStart(2, '0')}:
-        {seconds.toString().padStart(2, '0')}
+      <div className="timer-container">
+        <div className="timer-unit">
+          <div className="timer-value">{days.toString().padStart(2, '0')}</div>
+          <div className="timer-label">DAYS</div>
+        </div>
+        <div className="timer-separator">:</div>
+        <div className="timer-unit">
+          <div className="timer-value">{hours.toString().padStart(2, '0')}</div>
+          <div className="timer-label">HOURS</div>
+        </div>
+        <div className="timer-separator">:</div>
+        <div className="timer-unit">
+          <div className="timer-value">{minutes.toString().padStart(2, '0')}</div>
+          <div className="timer-label">MINUTES</div>
+        </div>
+        <div className="timer-separator">:</div>
+        <div className="timer-unit">
+          <div className="timer-value">{seconds.toString().padStart(2, '0')}</div>
+          <div className="timer-label">SECONDS</div>
+        </div>
       </div>
     </div>
   );
