@@ -2,8 +2,8 @@ import { motion } from 'framer-motion';
 import { FaGithub, FaLinkedin, FaInstagram, FaThreads } from 'react-icons/fa6';
 import { HiOutlineMail } from 'react-icons/hi';
 import { TypeAnimation } from 'react-type-animation';
-import profilePhoto from '../../assets/images/profile photo.jpg';
-import heroBackground from '../../assets/images/Adobe Express - file.jpg';
+import { Link } from 'react-router-dom';
+import profilePhoto from '@images/profile photo.jpg';
 
 const Hero = () => {
   const socialLinks = [
@@ -13,6 +13,24 @@ const Hero = () => {
     { icon: <FaThreads />, url: 'https://threads.net/@dameerahmed', title: 'Threads' },
     { icon: <HiOutlineMail />, url: 'mailto:dameer.ahmed@imperial.ac.uk', title: 'Email' },
   ];
+
+  const scrollToSection = (e, sectionId) => {
+    e.preventDefault();
+    
+    // If we're on the home page, scroll to the section
+    if (window.location.pathname === '/' || window.location.pathname === '') {
+      const element = document.getElementById(sectionId);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    } else {
+      // If we're on a different page, navigate to home with hash
+      window.location.href = `/#${sectionId}`;
+    }
+  };
+
+  // Check if current page is home
+  const isHomePage = window.location.pathname === '/' || window.location.pathname === '';
 
   return (
     <section className="hero" id="home">
@@ -41,12 +59,25 @@ const Hero = () => {
             Bridging the gap between intention and action through engineering, neuroscience, and human-centered design.
           </p>
           <div className="hero-cta">
-            <a href="#contact" className="btn mr-4">
-              Get In Touch
-            </a>
-            <a href="#projects" className="btn btn-outline">
-              View My Work
-            </a>
+            {isHomePage ? (
+              <a href="#contact" className="btn mr-4" onClick={(e) => scrollToSection(e, 'contact')}>
+                Get In Touch
+              </a>
+            ) : (
+              <Link to="/contact" className="btn mr-4">
+                Get In Touch
+              </Link>
+            )}
+            
+            {isHomePage ? (
+              <a href="#projects" className="btn btn-outline" onClick={(e) => scrollToSection(e, 'projects')}>
+                View My Work
+              </a>
+            ) : (
+              <Link to="/projects" className="btn btn-outline">
+                View My Work
+              </Link>
+            )}
           </div>
           <div className="social-links">
             {socialLinks.map((link, index) => (

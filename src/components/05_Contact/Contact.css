@@ -1,6 +1,6 @@
 .contact {
   padding: 6rem 0;
-  background-color: #fff;
+  background-color: #14101f;
 }
 
 .contact-content {
@@ -25,7 +25,7 @@
 }
 
 .contact-info {
-  background: #f9f9ff;
+  background: #343461;
   padding: 2.5rem;
   border-radius: 10px;
   box-shadow: 0 5px 20px rgba(0, 0, 0, 0.03);
@@ -104,7 +104,7 @@
 }
 
 .contact-form {
-  background: #f9f9ff;
+  background: #343461;
   padding: 2.5rem;
   border-radius: 10px;
   box-shadow: 0 5px 20px rgba(0, 0, 0, 0.03);

@@ -1,8 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
-import { Routes, Route, useLocation } from 'react-router-dom';
+import { Routes, Route, useLocation, Navigate, Outlet, Link, useParams } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import './App.css';
-import Header from './components/00_Header/Header';
+import Header from './components/00_Header/header';
 import Hero from './components/01_Hero/Hero';
 import About from './components/02_About/About';
 import Projects from './components/04_Projects/Projects';
@@ -21,6 +21,32 @@ const useLocationRef = () => {
   }, [location]);
   
   return locationRef;
+};
+
+// Projects layout component to handle nested routes - simplified to just pass through content
+const ProjectsLayout = () => {
+  return <Outlet />;
+};
+
+// Dynamic project page component that loads the appropriate project based on the route parameter
+const ProjectPage = () => {
+  const { projectId } = useParams();
+  
+  // Map of project IDs to their respective components
+  const projectComponents = {
+    'ana-proj': ANAProj,
+    // Add more projects here as they are created
+    // 'project-name': ProjectComponent,
+  };
+  
+  const ProjectComponent = projectComponents[projectId];
+  
+  if (!ProjectComponent) {
+    // If project doesn't exist, redirect to projects page
+    return <Navigate to="/projects" replace />;
+  }
+  
+  return <ProjectComponent />;
 };
 
 function App() {
@@ -59,6 +85,66 @@ function App() {
     return () => window.removeEventListener('hashchange', handleHashChange);
   }, []);
 
+  // Function to scroll to a section by ID
+  const scrollToSection = (id) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+  
+  // Components to handle redirection to specific sections
+  const ProjectsRedirect = () => {
+    const hasScrolled = useRef(false);
+    
+    useEffect(() => {
+      // Only scroll if this is the first render
+      if (!hasScrolled.current) {
+        // Small timeout to ensure rendering is complete
+        setTimeout(() => {
+          scrollToSection('projects');
+          hasScrolled.current = true;
+        }, 100);
+      }
+    }, []);
+    
+    return <Home />;
+  };
+  
+  const AboutRedirect = () => {
+    const hasScrolled = useRef(false);
+    
+    useEffect(() => {
+      // Only scroll if this is the first render
+      if (!hasScrolled.current) {
+        // Small timeout to ensure rendering is complete
+        setTimeout(() => {
+          scrollToSection('about');
+          hasScrolled.current = true;
+        }, 100);
+      }
+    }, []);
+    
+    return <Home />;
+  };
+  
+  const ContactRedirect = () => {
+    const hasScrolled = useRef(false);
+    
+    useEffect(() => {
+      // Only scroll if this is the first render
+      if (!hasScrolled.current) {
+        // Small timeout to ensure rendering is complete
+        setTimeout(() => {
+          scrollToSection('contact');
+          hasScrolled.current = true;
+        }, 100);
+      }
+    }, []);
+    
+    return <Home />;
+  };
+
   const Home = () => (
     <>
       <Hero id="home" />
@@ -75,7 +161,16 @@ function App() {
         <AnimatePresence mode="wait">
           <Routes location={location} key={location.pathname}>
             <Route path="/neurotech-unplugged" element={<NeurotechUnpluggedPage />} />
-            <Route path="/ana-proj" element={<ANAProj />} />
+            
+            {/* Section redirects */}
+            <Route path="/about" element={<AboutRedirect />} />
+            <Route path="/projects" element={<ProjectsRedirect />} />
+            <Route path="/contact" element={<ContactRedirect />} />
+            
+            {/* Dynamic project routes - handles both singular and plural forms */}
+            <Route path="/projects/:projectId" element={<ProjectPage />} />
+            <Route path="/project/:projectId" element={<ProjectPage />} />
+            
             <Route path="/" element={<Home />} />
           </Routes>
         </AnimatePresence>

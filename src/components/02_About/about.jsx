@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { FaBrain, FaVideo, FaLightbulb } from 'react-icons/fa';
-import brainImage from '../../assets/images/brain.png';
+import brainImage from '@images/brain.png';
 import './about.css';
 
 const About = () => {

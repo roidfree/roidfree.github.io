@@ -5,6 +5,8 @@ import { FaPython, FaReact } from 'react-icons/fa';
 import { SiTensorflow, SiArduino, SiRaspberrypi } from 'react-icons/si';
 import { TbBrain, TbDeviceWatchStats, TbMicroscope } from 'react-icons/tb';
 import { Link } from 'react-router-dom';
+import anaImage from '@images/Introducing ANA.png';
+import hackstarterImage from '@images/hackstarter.jpg';
 import './Projects.css';
 
 const Projects = () => {
@@ -16,9 +18,9 @@ const Projects = () => {
       title: 'EEG Brain-health Patch',
       description: 'An innovative wearable EEG device for continuous brain health monitoring. Imperial Faculty of Natural Sciences finalist project.',
       tags: ['EEG', 'Machine Learning', 'Hardware', 'Signal Processing'],
-      image: 'src/assets/images/Introducing ANA.png',
+      image: anaImage,
       github: '#',
-      demo: '/ana-proj',
+      demo: '/projects/ana-proj',
       category: 'Neurotechnology',
     },
     {
@@ -26,7 +28,7 @@ const Projects = () => {
       title: 'Hackstarter EEG Prototype',
       description: 'A focus-tracking wearable device using EEG signals and machine learning algorithms to optimize cognitive performance.',
       tags: ['EEG', 'TensorFlow', 'Python', 'Embedded Systems'],
-      image: 'src/assets/images/hackstarter.jpg',
+      image: hackstarterImage,
       github: 'https://github.com/roidfree/focus-classifier',
       demo: '#',
       category: 'Neurotechnology'
@@ -153,14 +155,24 @@ const Projects = () => {
                       </a>
                     )}
                     {project.demo && (
-                      <a 
-                        href={project.demo} 
-                        target="_blank" 
-                        rel="noopener noreferrer"
-                        aria-label="Live Demo"
-                      >
-                        <FiExternalLink />
-                      </a>
+                      project.demo.startsWith('/') ? (
+                        <Link 
+                          to={project.demo}
+                          aria-label="View Project"
+                          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                        >
+                          <FiExternalLink />
+                        </Link>
+                      ) : (
+                        <a 
+                          href={project.demo} 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          aria-label="Live Demo"
+                        >
+                          <FiExternalLink />
+                        </a>
+                      )
                     )}
                   </div>
                 </div>

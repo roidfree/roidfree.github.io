@@ -25,7 +25,7 @@ const Header = () => {
     setIsMenuOpen(false);
     
     // If we're on the home page, scroll to the section
-    if (window.location.pathname === '/') {
+    if (window.location.pathname === '/' || window.location.pathname === '') {
       const element = document.getElementById(sectionId);
       if (element) {
         element.scrollIntoView({ behavior: 'smooth' });
@@ -37,12 +37,15 @@ const Header = () => {
   };
   
   // Check if current page is home
-  const isHomePage = window.location.pathname === '/';
+  const isHomePage = window.location.pathname === '/' || window.location.pathname === '';
 
   return (
     <header className={`header ${scrolled ? 'scrolled' : ''}`}>
       <nav>
-        <div className="logo">Dameer Ahmed</div>
+        <Link to="/" className="logo" onClick={() => {
+          setIsMenuOpen(false);
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }}>Dameer Ahmed</Link>
         
         {/* Mobile menu button */}
         <button 
@@ -61,14 +64,14 @@ const Header = () => {
             {isHomePage ? (
               <a href="#about" onClick={(e) => scrollToSection(e, 'about')}>About</a>
             ) : (
-              <Link to="/#about" onClick={() => setIsMenuOpen(false)}>About</Link>
+              <Link to="/about" onClick={() => setIsMenuOpen(false)}>About</Link>
             )}
           </li>
           <li>
             {isHomePage ? (
               <a href="#projects" onClick={(e) => scrollToSection(e, 'projects')}>Projects</a>
             ) : (
-              <Link to="/#projects" onClick={() => setIsMenuOpen(false)}>Projects</Link>
+              <Link to="/projects" onClick={() => setIsMenuOpen(false)}>Projects</Link>
             )}
           </li>
           <li>
@@ -88,7 +91,7 @@ const Header = () => {
             {isHomePage ? (
               <a href="#contact" onClick={(e) => scrollToSection(e, 'contact')}>Contact</a>
             ) : (
-              <Link to="/#contact" onClick={() => setIsMenuOpen(false)}>Contact</Link>
+              <Link to="/contact" onClick={() => setIsMenuOpen(false)}>Contact</Link>
             )}
           </li>
         </ul>

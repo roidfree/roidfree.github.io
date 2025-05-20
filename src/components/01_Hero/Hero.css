@@ -1,11 +1,10 @@
 .hero {
-  min-height: 100vh;
+  height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
   width: 100%;
-  background-color: var(--darker-color);
   margin-top: 0;
   padding: 0;
 }

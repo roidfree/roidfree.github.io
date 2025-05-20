@@ -16,23 +16,25 @@ const Footer = () => {
     <footer className="footer">
       <div className="container">
         <div className="footer-content">
-          <div className="footer-social">
-            {socialLinks.map((link, index) => (
-              <a 
-                key={index}
-                href={link.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="social-link"
-                aria-label={link.label}
-              >
-                {link.icon}
-              </a>
-            ))}
+          <div className="footer-row">
+            <p className="footer-text">
+              &copy; {currentYear} Dameer A.
+            </p>
+            <div className="footer-social">
+              {socialLinks.map((link, index) => (
+                <a 
+                  key={index}
+                  href={link.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="social-link"
+                  aria-label={link.label}
+                >
+                  {link.icon}
+                </a>
+              ))}
+            </div>
           </div>
-          <p className="footer-text">
-            &copy; {currentYear} Your Name. All rights reserved.
-          </p>
         </div>
       </div>
     </footer>
