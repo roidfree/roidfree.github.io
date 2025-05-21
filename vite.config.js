@@ -6,6 +6,17 @@ import path from 'path'
 export default defineConfig({
   plugins: [react()],
   base: '/',
+  build: {
+    outDir: 'dist',
+    assetsDir: 'assets',
+    sourcemap: false,
+    // Generate clean URLs
+    rollupOptions: {
+      output: {
+        manualChunks: undefined
+      }
+    }
+  },
   resolve: {
     alias: {
       '@images': path.resolve(__dirname, './src/assets/images')
