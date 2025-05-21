@@ -1,8 +1,9 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { FaBrain, FaVideo, FaLightbulb } from 'react-icons/fa';
-import brainImage from '@images/brain.png';
+import faviconImage from '@images/favicon.png';
 import './about.css';
+import teachingImage from '@images/teaching.webp';
 
 const About = () => {
   const skills = [
@@ -40,7 +41,7 @@ const About = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <img src={brainImage} alt="Neurotechnology" className="about-image" />
+            <img src={faviconImage} alt="Neurotechnology" className="about-image" />
           </motion.div>
           <div className="about-text">
             <h2>About Me</h2>

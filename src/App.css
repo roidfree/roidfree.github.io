@@ -102,9 +102,9 @@ section:not(.hero) {
 /* This ensures the first section (hero) starts below the header */
 section.hero {
   padding-top: 120px;
-  background: linear-gradient(rgba(50, 50, 50, 0.7), rgba(50, 50, 50, 0.7)), url('@images/hero-background.jpg');
+  background: linear-gradient(rgba(50, 50, 50, 0.7), rgba(50, 50, 50, 0.7)), url('@images/hero-background.webp');
   background-size: cover;
-  background-position: center;
+  background-position: center 30%;
   background-repeat: no-repeat;
 }
 

@@ -1,6 +1,9 @@
 .about {
   padding: 6rem 0;
-  background-color: #282838b0;
+  background: linear-gradient(rgba(50, 50, 50, 0.7), rgba(50, 50, 50, 0.7)), url('@images/teaching.webp');
+  background-size: cover;
+  background-position: center;
+  background-repeat: repeat;
 }
 
 .about-content {
@@ -36,13 +39,25 @@
   max-width: 800px;
   margin: 0 auto 3rem;
   text-align: center;
+  background-color: rgba(2, 12, 27, 0.6);
+  border-radius: 10px;
+  padding: 2.5rem 2rem;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.about-text:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
 }
 
 .about-text p {
   margin-bottom: 1.5rem;
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   line-height: 1.8;
-  color: var(--text-light);
+  color: var(--text-color);
+  font-weight: 500;
+  text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.2);
 }
 
 .skills-grid {
@@ -94,6 +109,11 @@
 
 /* Responsive Design */
 @media (max-width: 768px) {
+  .about {
+    background-position: center;
+    background-size: cover;
+    background-repeat: repeat;
+  }
   .about-content {
     grid-template-columns: 1fr;
   }

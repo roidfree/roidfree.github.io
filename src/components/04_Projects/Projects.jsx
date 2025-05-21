@@ -5,10 +5,12 @@ import { FaPython, FaReact } from 'react-icons/fa';
 import { SiTensorflow, SiArduino, SiRaspberrypi } from 'react-icons/si';
 import { TbBrain, TbDeviceWatchStats, TbMicroscope } from 'react-icons/tb';
 import { Link } from 'react-router-dom';
-import anaImage from '@images/Introducing ANA.png';
-import hackstarterImage from '@images/hackstarter.jpg';
+import anaImage from '@images/Introducing ANA.webp';
+import hackstarterImage from '@images/hackstarter.webp';
 import './Projects.css';
-
+import cellsysImage from '@images/Cellsys 2.webp';
+import teachingImage from '@images/teaching.webp';
+import comingSoonImage from '@images/coming-soon.webp';
 const Projects = () => {
   const [activeFilter, setActiveFilter] = useState('All');
 
@@ -38,19 +40,19 @@ const Projects = () => {
       title: 'Automated Cell Culture System',
       description: 'A robotic system for automating laboratory cell culture processes, increasing efficiency and reducing human error.',
       tags: ['Robotics', 'Python', 'Arduino', 'Lab Automation'],
-      image: 'https://via.placeholder.com/600x400/ff006e/ffffff?text=Cell+Culture+System',
+      image: cellsysImage,
       github: '#',
       demo: '#',
       category: 'Research'
     },
     {
       id: 4,
-      title: 'Neurofeedback Training Platform',
-      description: 'An interactive platform that provides real-time feedback on brain activity to help users improve focus and cognitive performance.',
-      tags: ['React', 'Python', 'EEG', 'Real-time Processing'],
-      image: 'https://via.placeholder.com/600x400/ffbe0b/ffffff?text=Neurofeedback+Platform',
-      github: '#',
-      demo: '#',
+      title: '3D Robotic Arm',
+      description: 'A 3D printed robotic arm inspired by surgical robots',
+      tags: ['CAD', 'Electronics', 'Robotics', 'C++', 'Arduino'],
+      image: 'https://img.youtube.com/vi/EB8IfXXxCYQ/hqdefault.jpg',
+      github: 'https://github.com/roidfree/3D-printed-robotic-arm',
+      demo: 'https://www.youtube.com/watch?v=EB8IfXXxCYQ',
       category: 'Neurotechnology'
     },
     {
@@ -58,19 +60,19 @@ const Projects = () => {
       title: 'Intention-Action Gap Analysis Tool',
       description: 'A research tool that analyzes behavioral patterns to identify gaps between stated intentions and actual actions.',
       tags: ['Data Analysis', 'Psychology', 'Python', 'Visualization'],
-      image: 'https://via.placeholder.com/600x400/fb5607/ffffff?text=Intention-Action+Tool',
+      image: comingSoonImage,
       github: '#',
       demo: '#',
       category: 'Behavioral Science'
     },
     {
       id: 6,
-      title: 'Neurotech Educational Platform',
-      description: 'An interactive educational platform for the Imperial Neurotechnology Society to introduce students to BCI concepts and applications.',
-      tags: ['React', 'Educational', 'Interactive', 'Neuroscience'],
-      image: 'https://via.placeholder.com/600x400/8338ec/ffffff?text=Educational+Platform',
+      title: 'Imperial Neurotechnology Society',
+      description: 'Founded and led the Imperial Neurotechnology Society, a student-run organization dedicated to promoting neurotechnology education and research at Imperial College London. First and largest in UK.',
+      tags: ['Neurotechnology', 'Educational', 'Interactive', 'Neuroscience'],
+      image: teachingImage,
       github: '#',
-      demo: '#',
+      demo: 'https://iclneurotech.co.uk',
       category: 'Education'
     },
   ];
