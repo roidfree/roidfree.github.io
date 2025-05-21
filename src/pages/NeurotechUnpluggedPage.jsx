@@ -1,7 +1,7 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
 import InstitutionalHeader from '../components/07_NeurotechUnplugged/InstitutionalHeader';
-import Footer from '../components/06_Footer/Footer';
+import Footer from '../components/06_Footer/footer';
 
 // Import subcomponents
 import Speakers from '../components/07_NeurotechUnplugged/Speakers/SpeakerProfiles';
