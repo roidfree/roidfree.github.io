@@ -4,7 +4,7 @@ import { AnimatePresence } from 'framer-motion';
 import './App.css';
 import Header from './components/00_Header/header';
 import Hero from './components/01_Hero/Hero';
-import About from './components/02_About/About';
+import About from './components/02_About/about';
 import Projects from './components/04_Projects/Projects';
 import Contact from './components/05_Contact/Contact';
 import Footer from './components/06_Footer/Footer';
