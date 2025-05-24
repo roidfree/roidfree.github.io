@@ -1,6 +1,7 @@
 import React from 'react';
-import Timer from '../components/timer/timer'; // Adjust path as needed
-import './ANA-Proj.css'; // Import the CSS file
+import Timer from '../components/timer/timer'; 
+import './ANA-Proj.css'; 
+import NotionCardContainer from '../components/notion/NotionCardContainer';
 
 const ANAProj = () => (
   <div className="ana-proj">
@@ -14,9 +15,16 @@ const ANAProj = () => (
         <Timer targetDate={new Date('2025-05-21T00:00:00')} />
       </div>
       
-      <div className="ana-footer">
-        <h2 className="ana-coming-soon">Update coming soon</h2>
+      <div className="ana-posts-section">
+        <NotionCardContainer />
       </div>
+        
+      
+        
+      <div className="ana-footer">
+        <h2 className="ana-coming-soon">Updates <span>coming soon</span></h2>
+      </div>
+      
     </div>
   </div>
 );
