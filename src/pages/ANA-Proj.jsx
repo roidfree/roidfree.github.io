@@ -11,7 +11,7 @@ const ANAProj = () => (
       </div>
       
       <div className="ana-timer-section">
-        <Timer targetDate={new Date('2025-05-21T00:00:00')} />
+        <Timer targetDate={new Date('2025-05-26T00:00:00')} /> 
       </div>
       
       <div className="ana-footer">
