@@ -1,15 +1,18 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, lazy, Suspense } from 'react';
 import { Routes, Route, useLocation, Navigate, Outlet, Link, useParams } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import './App.css';
 import Header from './components/00_Header/header';
 import Hero from './components/01_Hero/Hero';
 import About from './components/02_About/about';
-import Projects from './components/04_Projects/Projects';
 import Contact from './components/05_Contact/Contact';
 import Footer from './components/06_Footer/footer';
 import NeurotechUnpluggedPage from './pages/NeurotechUnpluggedPage';
 import ANAProj from './pages/ANA-Proj';
+import LoadingSpinner from './components/common/LoadingSpinner';
+
+// Lazy load the Projects component
+const Projects = lazy(() => import('./components/04_Projects/Projects'));
 
 // Store the current location in a ref to prevent infinite re-renders
 const useLocationRef = () => {
@@ -63,26 +66,50 @@ function App() {
   }, []);
 
   useEffect(() => {
-    // Handle hash-based navigation
-    const handleHashChange = () => {
+    // Handle navigation and scrolling
+    const handleNavigation = () => {
+      // Check if we need to scroll to projects (coming from another page)
+      const shouldScrollToProjects = sessionStorage.getItem('scrollToProjects');
+      
+      if (shouldScrollToProjects) {
+        sessionStorage.removeItem('scrollToProjects');
+        
+        // Small delay to ensure the Projects component is mounted
+        const timer = setTimeout(() => {
+          const projectsElement = document.getElementById('projects');
+          if (projectsElement) {
+            projectsElement.scrollIntoView({ 
+              behavior: 'smooth',
+              block: 'start'
+            });
+          }
+        }, 500);
+        
+        return () => clearTimeout(timer);
+      }
+      
+      // Handle hash-based navigation
       if (window.location.hash) {
         const id = window.location.hash.substring(1);
         const element = document.getElementById(id);
         if (element) {
-          element.scrollIntoView({ behavior: 'smooth' });
+          element.scrollIntoView({ 
+            behavior: 'smooth',
+            block: 'start'
+          });
         }
       }
     };
 
-    // Check for hash on initial load
-    if (window.location.hash) {
-      // Small timeout to ensure the DOM is ready
-      setTimeout(handleHashChange, 100);
-    }
-
+    // Initial check
+    handleNavigation();
+    
     // Add event listener for hash changes
-    window.addEventListener('hashchange', handleHashChange);
-    return () => window.removeEventListener('hashchange', handleHashChange);
+    window.addEventListener('hashchange', handleNavigation);
+    
+    return () => {
+      window.removeEventListener('hashchange', handleNavigation);
+    };
   }, []);
 
   // Function to scroll to a section by ID
@@ -149,7 +176,15 @@ function App() {
     <>
       <Hero id="home" />
       <About id="about" />
-      <Projects id="projects" />
+      <Suspense 
+        fallback={
+          <div style={{ minHeight: '60vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <LoadingSpinner size="large" message="Loading projects..." />
+          </div>
+        }
+      >
+        <Projects id="projects" />
+      </Suspense>
       <Contact id="contact" />
     </>
   );
