@@ -18,7 +18,7 @@ const About = () => {
       description: 'Creating compelling visual narratives that communicate complex ideas and inspire meaningful action.' 
     },
     { 
-      name: 'Behavioral Science', 
+      name: 'Behavioural Science', 
       icon: <FaLightbulb />, 
       description: 'Applying insights from psychology and neuroscience to bridge the gap between intention and action in everyday life.' 
     },
