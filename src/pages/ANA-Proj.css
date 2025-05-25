@@ -31,14 +31,15 @@ main {
   justify-content: center;
   text-align: center;
   width: 100%;
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 0 auto;
   gap: 1.5rem; /* Moderate spacing between elements */
 }
 
 /* Top section with title and subtitle */
 .ana-header {
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
+  padding: 0 1.5rem;
 }
 
 .ana-title {
@@ -57,7 +58,9 @@ main {
 .ana-subtitle {
   font-size: clamp(1rem, 2vw, 1.25rem);
   opacity: 0.8;
-  max-width: 600px;
+  max-width: 800px;
+  line-height: 1.6;
+  margin: 0 auto;
 }
 
 /* Timer section - main focus */
@@ -70,9 +73,16 @@ main {
   flex: 1;
 }
 
+/* Posts section */
+.ana-posts-section {
+  width: 100%;
+  padding: 1rem 0 3rem;
+}
+
 /* Footer section with coming soon text */
 .ana-footer {
-  margin-top: 1rem;
+  margin-top: 2rem;
+  padding: 0 1.5rem;
 }
 
 .ana-coming-soon {
@@ -84,26 +94,78 @@ main {
   background-color: rgba(0, 0, 0, 0.5);
   text-transform: uppercase;
   letter-spacing: 2px;
+  display: inline-block;
+}
+
+@media (max-width: 1024px) {
+  .ana-proj {
+    padding: 80px 0 30px;
+  }
+  
+  .ana-header {
+    margin-bottom: 1.5rem;
+  }
+  
+  .ana-subtitle {
+    max-width: 600px;
+  }
 }
 
 @media (max-width: 768px) {
   .ana-proj {
-    padding: 80px 0 30px; /* Adjusted padding for mobile */
-  }
-  
-  .ana-content {
-    gap: 1rem;
+    padding: 70px 0 20px;
   }
   
   .ana-header {
-    margin-bottom: 0.5rem;
+    margin-bottom: 1.25rem;
+    padding: 0 1.25rem;
   }
   
-  .ana-timer-section {
-    padding: 1rem 0;
+  .ana-title {
+    font-size: clamp(1.75rem, 6vw, 2.5rem);
+  }
+  
+  .ana-subtitle {
+    font-size: 1rem;
+  }
+  
+  .ana-posts-section {
+    padding: 0.5rem 0 2rem;
   }
   
   .ana-footer {
-    margin-top: 0.5rem;
+    margin-top: 1.5rem;
+  }
+  
+  .ana-coming-soon {
+    padding: 0.5rem 1.5rem;
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .ana-proj {
+    padding: 60px 0 20px;
+  }
+  
+  .ana-header {
+    padding: 0 1rem;
+  }
+  
+  .ana-title {
+    font-size: 1.75rem;
+  }
+  
+  .ana-subtitle {
+    font-size: 0.95rem;
+  }
+  
+  .ana-footer {
+    margin-top: 1rem;
+  }
+  
+  .ana-coming-soon {
+    padding: 0.4rem 1.2rem;
+    font-size: 1rem;
   }
 }

@@ -64,36 +64,38 @@ const Header = () => {
             {isHomePage ? (
               <a href="#about" onClick={(e) => scrollToSection(e, 'about')}>About</a>
             ) : (
-              <Link to="/about" onClick={() => setIsMenuOpen(false)}>About</Link>
+              <a href="/#about" onClick={() => setIsMenuOpen(false)}>About</a>
             )}
           </li>
           <li>
             {isHomePage ? (
               <a href="#projects" onClick={(e) => scrollToSection(e, 'projects')}>Projects</a>
             ) : (
-              <Link to="/projects" onClick={() => setIsMenuOpen(false)}>Projects</Link>
+              <a href="/#projects" onClick={() => setIsMenuOpen(false)}>Projects</a>
             )}
           </li>
           <li>
+            <Link to="/ana-proj" onClick={() => setIsMenuOpen(false)}>ANA</Link>
+          </li>
+          {/* <li>
             <Link 
               to="/neurotech-unplugged" 
               className={window.location.pathname === '/neurotech-unplugged' ? 'active' : ''}
               onClick={(e) => {
                 setIsMenuOpen(false);
-                // Scroll to top when navigating to the Neurotech Unplugged page
                 window.scrollTo({ top: 0, behavior: 'smooth' });
               }}
             >
               Neurotech Unplugged
             </Link>
-          </li>
-          <li>
+          </li> */}
+          {/* <li>
             {isHomePage ? (
               <a href="#contact" onClick={(e) => scrollToSection(e, 'contact')}>Contact</a>
             ) : (
-              <Link to="/contact" onClick={() => setIsMenuOpen(false)}>Contact</Link>
+              <a href="/#contact" onClick={() => setIsMenuOpen(false)}>Contact</a>
             )}
-          </li>
+          </li> */}
         </ul>
       </nav>
     </header>

@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { FiGithub, FiExternalLink } from 'react-icons/fi';
 import { FaPython, FaReact } from 'react-icons/fa';
 import { SiTensorflow, SiArduino, SiRaspberrypi } from 'react-icons/si';
 import { TbBrain, TbDeviceWatchStats, TbMicroscope } from 'react-icons/tb';
 import { Link } from 'react-router-dom';
+import LoadingSpinner from '../common/LoadingSpinner';
 import anaImage from '@images/Introducing ANA.webp';
 import hackstarterImage from '@images/hackstarter.webp';
 import './Projects.css';
@@ -13,6 +14,47 @@ import teachingImage from '@images/teaching.webp';
 import comingSoonImage from '@images/coming-soon.webp';
 const Projects = () => {
   const [activeFilter, setActiveFilter] = useState('All');
+  const [isVisible, setIsVisible] = useState(false);
+  const projectsRef = useRef(null);
+
+  // Set up intersection observer to detect when component is in viewport
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          // Optional: Unobserve after first intersection
+          observer.unobserve(entry.target);
+        }
+      },
+      {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.1 // Trigger when 10% of the component is visible
+      }
+    );
+
+    if (projectsRef.current) {
+      observer.observe(projectsRef.current);
+    }
+
+    return () => {
+      if (projectsRef.current) {
+        observer.unobserve(projectsRef.current);
+      }
+    };
+  }, []);
+
+  // Add a small delay before rendering content for smoother transition
+  const [showContent, setShowContent] = useState(false);
+  useEffect(() => {
+    if (isVisible) {
+      const timer = setTimeout(() => {
+        setShowContent(true);
+      }, 100);
+      return () => clearTimeout(timer);
+    }
+  }, [isVisible]);
 
   const projects = [
     {
@@ -22,7 +64,7 @@ const Projects = () => {
       tags: ['EEG', 'Machine Learning', 'Hardware', 'Signal Processing'],
       image: anaImage,
       github: '#',
-      demo: '/projects/ana-proj',
+      demo: '/ana-proj', // updated
       category: 'Neurotechnology',
     },
     {
@@ -106,8 +148,23 @@ const Projects = () => {
     }
   };
 
+  // Show loading spinner if not visible yet
+  if (!showContent) {
+    return (
+      <section className="projects" id="projects" ref={projectsRef}>
+        <div className="container">
+          <LoadingSpinner 
+            size="large" 
+            message="Loading projects..." 
+            fullScreen={false}
+          />
+        </div>
+      </section>
+    );
+  }
+
   return (
-    <section className="projects" id="projects">
+    <section className="projects" id="projects" ref={projectsRef}>
       <div className="container">
         <motion.div
           className="projects-content"

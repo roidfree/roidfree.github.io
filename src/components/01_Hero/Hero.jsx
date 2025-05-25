@@ -21,11 +21,26 @@ const Hero = () => {
     if (window.location.pathname === '/' || window.location.pathname === '') {
       const element = document.getElementById(sectionId);
       if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
+        // Add a small delay to ensure the Projects component is mounted
+        setTimeout(() => {
+          element.scrollIntoView({ 
+            behavior: 'smooth',
+            block: 'start'
+          });
+          
+          // Add focus for better accessibility
+          element.setAttribute('tabindex', '-1');
+          element.focus();
+          
+          // Remove the tabindex after focus is set
+          setTimeout(() => element.removeAttribute('tabindex'), 1000);
+        }, 100);
       }
     } else {
       // If we're on a different page, navigate to home with hash
-      window.location.href = `/#${sectionId}`;
+      // Store the scroll position in session storage
+      sessionStorage.setItem('scrollToProjects', 'true');
+      window.location.href = '/';
     }
   };
 
@@ -55,10 +70,11 @@ const Hero = () => {
             />
           </h2>
           <p className="hero-description">
-            Biomedical Technology student at Imperial College London, specializing in neurotechnology and brain-computer interfaces.
-            Bridging the gap between intention and action through engineering, neuroscience, and human-centered design.
+            Biomedical Technology student at Imperial College London, specialising in neurotechnology and brain-computer interfaces.
+            Bridging the gap between intention and action through engineering, neuroscience, and human-centred design.
           </p>
           <div className="hero-cta">
+            {/*
             {isHomePage ? (
               <a href="#contact" className="btn mr-4" onClick={(e) => scrollToSection(e, 'contact')}>
                 Get In Touch
@@ -68,7 +84,7 @@ const Hero = () => {
                 Get In Touch
               </Link>
             )}
-            
+            */}
             {isHomePage ? (
               <a href="#projects" className="btn btn-outline" onClick={(e) => scrollToSection(e, 'projects')}>
                 View My Work
