@@ -185,7 +185,7 @@ function App() {
       >
         <Projects id="projects" />
       </Suspense>
-      <Contact id="contact" />
+      {/* <Contact id="contact" /> */}
     </>
   );
 
@@ -205,6 +205,7 @@ function App() {
             {/* Dynamic project routes - handles both singular and plural forms */}
             <Route path="/projects/:projectId" element={<ProjectPage />} />
             <Route path="/project/:projectId" element={<ProjectPage />} />
+            <Route path="/ana-proj" element={<ANAProj />} />
             
             <Route path="/" element={<Home />} />
           </Routes>

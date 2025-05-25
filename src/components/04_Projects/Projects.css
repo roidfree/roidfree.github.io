@@ -98,7 +98,7 @@
 }
 
 .project-card {
-  background: var(--dark-color);
+  background: #0a0b0c80;
   border-radius: var(--border-radius);
   overflow: hidden;
   box-shadow: var(--box-shadow);

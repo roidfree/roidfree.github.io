@@ -70,10 +70,11 @@ const Hero = () => {
             />
           </h2>
           <p className="hero-description">
-            Biomedical Technology student at Imperial College London, specializing in neurotechnology and brain-computer interfaces.
-            Bridging the gap between intention and action through engineering, neuroscience, and human-centered design.
+            Biomedical Technology student at Imperial College London, specialising in neurotechnology and brain-computer interfaces.
+            Bridging the gap between intention and action through engineering, neuroscience, and human-centred design.
           </p>
           <div className="hero-cta">
+            {/*
             {isHomePage ? (
               <a href="#contact" className="btn mr-4" onClick={(e) => scrollToSection(e, 'contact')}>
                 Get In Touch
@@ -83,7 +84,7 @@ const Hero = () => {
                 Get In Touch
               </Link>
             )}
-            
+            */}
             {isHomePage ? (
               <a href="#projects" className="btn btn-outline" onClick={(e) => scrollToSection(e, 'projects')}>
                 View My Work

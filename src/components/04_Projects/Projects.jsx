@@ -64,7 +64,7 @@ const Projects = () => {
       tags: ['EEG', 'Machine Learning', 'Hardware', 'Signal Processing'],
       image: anaImage,
       github: '#',
-      demo: '/projects/ana-proj',
+      demo: '/ana-proj', // updated
       category: 'Neurotechnology',
     },
     {
