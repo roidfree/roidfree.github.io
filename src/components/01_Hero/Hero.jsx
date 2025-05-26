@@ -9,8 +9,8 @@ const Hero = () => {
   const socialLinks = [
     { icon: <FaGithub />, url: 'https://github.com/roidfree', title: 'GitHub' },
     { icon: <FaLinkedin />, url: 'https://linkedin.com/in/dameerahmed', title: 'LinkedIn' },
-    { icon: <FaInstagram />, url: 'https://instagram.com/dameerahmed', title: 'Instagram' },
-    { icon: <FaThreads />, url: 'https://threads.net/@dameerahmed', title: 'Threads' },
+    { icon: <FaInstagram />, url: 'https://instagram.com/realdameer', title: 'Instagram' },
+    { icon: <FaThreads />, url: 'https://threads.net/@realdameer', title: 'Threads' },
     { icon: <HiOutlineMail />, url: 'mailto:dameer.ahmed@imperial.ac.uk', title: 'Email' },
   ];
 
