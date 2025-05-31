@@ -20,6 +20,22 @@ app.get('/api/posts', async (req, res) => {
     const response = await notion.databases.query({
       database_id: databaseId,
       sorts: [{ property: 'Publish Date', direction: 'descending' }],
+      filter: {
+        and: [
+          {
+            property: 'Status',
+            status: {
+              equals: 'Published',
+            },
+          },
+          {
+            property: 'Initiative',
+            multi_select: {
+              contains: 'ANA',
+            },
+          },
+        ]
+      },
     });
 
     if (!response || !response.results) {
