@@ -83,8 +83,8 @@ const Projects = () => {
       description: 'A robotic system for automating laboratory cell culture processes, increasing efficiency and reducing human error.',
       tags: ['Robotics', 'Python', 'Arduino', 'Lab Automation'],
       image: cellsysImage,
-      github: '#',
-      demo: '#',
+      github: 'https://github.com/roidfree/Automated-Cell-Culture',
+      demo: 'https://www.youtube.com/watch?v=CP_furnj_WU',
       category: 'Research'
     },
     {
