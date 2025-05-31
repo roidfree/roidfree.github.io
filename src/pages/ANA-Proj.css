@@ -32,8 +32,7 @@ main {
   text-align: center;
   width: 100%;
   max-width: 1400px;
-  margin: 0 auto;
-  gap: 1.5rem; /* Moderate spacing between elements */
+  margin: 0 auto; /* Moderate spacing between elements */
 }
 
 /* Top section with title and subtitle */
@@ -227,16 +226,19 @@ main {
 
 /* Subscribe section styles */
 .ana-subscribe-section {
-  margin: 3.5rem auto 0 auto;
-  padding: 2.5rem 0 1.5rem 0;
+  margin: 1rem 1rem 2rem 1rem;
+  padding: 1.5rem 1rem 2.5rem 1rem;
   max-width: 600px;
   text-align: center;
+  border: rgb(41, 63, 110) 3px solid;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
 }
 .ana-subscribe-title {
   font-family: 'Orbitron', sans-serif;
   font-size: 2.3rem;
   font-weight: 700;
-  color: #232b47;
+  color: #ffffff;
   margin-bottom: 0.5rem;
 }
 .ana-subscribe-desc {
@@ -287,6 +289,22 @@ main {
   border: 1.5px solid #2747a6;
 }
 
+.section-divider {
+    height: 3px;
+    width: 80%;
+    margin: 3rem auto;
+    background: linear-gradient(90deg, #4b6cb7 0%, #182848 100%);
+    opacity: 0.8;
+}
+  .ana-posts-title {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+  .ana-posts-desc {
+    margin-bottom: 1.5rem;
+    text-align: center !important;
+  }
 @media (max-width: 1024px) {
   .ana-proj {
     padding: 80px 0 30px;
@@ -322,7 +340,16 @@ main {
   .ana-posts-section {
     padding: 0.5rem 0 2rem;
   }
-  
+  .ana-posts-title {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+  .ana-posts-desc {
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
   .ana-footer {
     margin-top: 1.5rem;
   }

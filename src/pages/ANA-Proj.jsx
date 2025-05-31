@@ -18,20 +18,24 @@ const ANAProj = () => {
           <p className="ana-subtitle">Student led-project trying to create skin-wearable technology for brain health</p>
         </div>
         
-        <div className="ana-timer-section">
+        {/* <div className="ana-timer-section">
           <Timer targetDate={new Date('2025-05-29T18:00:00')} />
         </div>
         <div className="ana-coming-soon-wrapper">
           <h2 className="ana-coming-soon">Updates <span>coming soon</span></h2>
-        </div>
+        </div> */}
         <div className="ana-subscribe-section">
           <h2 className="ana-subscribe-title">Stay Updated</h2>
           <p className="ana-subscribe-desc">Join our mailing list for the latest ANA updates and releases.</p>
           <SubscribeForm />
         </div>
 
+        <div className="section-divider"></div>
+
         <div className="ana-posts-section">
-          {/* <NotionCardContainer /> */}
+          <h2 className="ana-posts-title">Latest Posts</h2>
+          <p className="ana-posts-desc">Check out our latest updates and insights on the ANA project.</p>
+          {<NotionCardContainer />}
         </div>
         <div className="ana-footer">
           {/* <Button onClick={() => setModalOpen(true)} className="ana-loop-btn">Stay in the Loop</Button> */}
