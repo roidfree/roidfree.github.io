@@ -1,9 +1,47 @@
+redirectsOrigin = "config"
+headers = []
+
+[functions]
+directory = ".netlify/functions"
+
+[functions."*"]
+
+[[plugins]]
+origin = "ui"
+package = "@netlify/plugin-lighthouse"
+pinned_version = "6"
+
+[plugins.inputs]
+
 [build]
-  base = "."
-  command = "npm run build"
-  publish = "dist"
+publish = "C:\\Users\\calli\\Documents\\Projects\\roidfree.github.io\\dist"
+publishOrigin = "config"
+commandOrigin = "config"
+command = "npm run build"
+base = "C:\\Users\\calli\\Documents\\Projects\\roidfree.github.io"
+
+[build.environment]
+
+[build.processing]
+
+[build.processing.css]
+
+[build.processing.html]
+
+[build.processing.images]
+
+[build.processing.js]
+
+[build.services]
 
 [[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200 
+from = "/*"
+to = "/index.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
