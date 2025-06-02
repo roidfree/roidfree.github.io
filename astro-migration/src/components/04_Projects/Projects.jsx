@@ -4,14 +4,14 @@ import { FiGithub, FiExternalLink } from 'react-icons/fi';
 import { FaPython, FaReact } from 'react-icons/fa';
 import { SiTensorflow, SiArduino, SiRaspberrypi } from 'react-icons/si';
 import { TbBrain, TbDeviceWatchStats, TbMicroscope } from 'react-icons/tb';
-import { Link } from 'react-router-dom';
 import LoadingSpinner from '../common/LoadingSpinner';
-import anaImage from '@images/Introducing ANA.webp';
+import anaImage from '../../assets/images/Introducing ANA.webp';
 import hackstarterImage from '@images/hackstarter.webp';
 import './Projects.css';
 import cellsysImage from '@images/Cellsys 2.webp';
 import teachingImage from '@images/teaching.webp';
 import comingSoonImage from '@images/coming-soon.webp';
+
 const Projects = () => {
   const [activeFilter, setActiveFilter] = useState('All');
   const [isVisible, setIsVisible] = useState(false);
@@ -64,7 +64,7 @@ const Projects = () => {
       tags: ['EEG', 'Machine Learning', 'Hardware', 'Signal Processing'],
       image: anaImage,
       github: '#',
-      demo: '/ana-proj', // updated
+      demo: '/ana-proj', // internal demo link
       category: 'Neurotechnology',
     },
     {
@@ -191,7 +191,6 @@ const Projects = () => {
           </div>
 
           <div className="projects-grid">
-            {filteredProjects.length === 0 && <p>No projects found for this category.</p>}
             {filteredProjects.map((project, index) => (
               <motion.div
                 key={project.id}
@@ -215,13 +214,24 @@ const Projects = () => {
                       </a>
                     )}
                     {project.demo && (
-                      <a 
-                        href={project.demo} 
-                        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-                        aria-label="Live Demo"
-                      >
-                        <FiExternalLink />
-                      </a>
+                      project.demo.startsWith('/') ? (
+                        <a 
+                          href={project.demo}
+                          aria-label="View Project"
+                          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                        >
+                          <FiExternalLink />
+                        </a>
+                      ) : (
+                        <a 
+                          href={project.demo} 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          aria-label="Live Demo"
+                        >
+                          <FiExternalLink />
+                        </a>
+                      )
                     )}
                   </div>
                 </div>
