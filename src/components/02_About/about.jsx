@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { FaBrain, FaVideo, FaLightbulb } from 'react-icons/fa';
-import faviconImage from '@images/favicon.png';
+import faviconImage from '/favicon.png';
 import './about.css';
 import teachingImage from '@images/teaching.webp';
 

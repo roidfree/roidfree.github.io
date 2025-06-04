@@ -4,9 +4,9 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const { Client } = require('@notionhq/client');
+const serverless = require('serverless-http');
 
 const app = express();
-const port = process.env.PORT || 3001;
 
 // Middleware
 app.use(cors());
@@ -22,6 +22,22 @@ app.get('/api/posts', async (req, res) => {
     const response = await notion.databases.query({
       database_id: databaseId,
       sorts: [{ property: 'Publish Date', direction: 'descending' }],
+      filter: {
+        and: [
+          {
+            property: 'Status',
+            status: {
+              equals: 'Published',
+            },
+          },
+          {
+            property: 'Initiative',
+            multi_select: {
+              contains: 'ANA',
+            },
+          },
+        ]
+      },
     });
 
     if (!response || !response.results) {
@@ -51,7 +67,13 @@ app.get('/api/posts', async (req, res) => {
   }
 });
 
-// Start server
-app.listen(port, () => {
-  console.log(`Server running on http://localhost:${port}`);
-});
+// Export the Express app wrapped in serverless-http
+module.exports.handler = serverless(app);
+
+// Optionally start the server locally if running directly
+if (require.main === module) {
+  const port = process.env.PORT || 3001;
+  app.listen(port, () => {
+    console.log(`Server running on http://localhost:${port}`);
+  });
+}

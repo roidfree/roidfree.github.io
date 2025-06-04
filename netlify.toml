@@ -1,3 +1,18 @@
+redirectsOrigin = "config"
+headers = []
+
+[functions]
+directory = ".netlify/functions"
+
+[functions."*"]
+
+[[plugins]]
+origin = "ui"
+package = "@netlify/plugin-lighthouse"
+pinned_version = "6"
+
+[plugins.inputs]
+
 [build]
 publish = "./dist"
 command = "npm run build"

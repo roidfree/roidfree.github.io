@@ -17,11 +17,21 @@ export const fetchPosts = async () => {
     const response = await fetch(`${API_URL}${endpoint}`);
     
     if (!response.ok) {
-      const error = await response.json();
-      throw new Error(error.message || 'Failed to fetch posts');
+      const errorText = await response.text();
+      let errorMessage;
+      
+      try {
+        const errorJson = JSON.parse(errorText);
+        errorMessage = errorJson.message || 'Failed to fetch posts';
+      } catch {
+        errorMessage = `HTTP ${response.status}: ${response.statusText}`;
+      }
+      
+      throw new Error(errorMessage);
     }
     
     const data = await response.json();
+    console.log(`Successfully fetched ${data.length} posts`);
     return data;
   } catch (error) {
     console.error('Error fetching posts:', error);
