@@ -1,3 +1,5 @@
+// not being used // but kept for reference in case needed later
+// This is a simple Express server that fetches posts from a Notion database
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
