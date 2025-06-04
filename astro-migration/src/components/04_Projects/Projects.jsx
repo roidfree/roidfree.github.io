@@ -5,11 +5,6 @@ import { FaPython, FaReact } from 'react-icons/fa';
 import { SiTensorflow, SiArduino, SiRaspberrypi } from 'react-icons/si';
 import { TbBrain, TbDeviceWatchStats, TbMicroscope } from 'react-icons/tb';
 import LoadingSpinner from '../common/LoadingSpinner';
-import anaImage from '../../assets/images/Introducing ANA.webp';
-import hackstarterImage from '@images/hackstarter.webp';
-import cellsysImage from '@images/Cellsys 2.webp';
-import teachingImage from '@images/teaching.webp';
-import comingSoonImage from '@images/coming-soon.webp';
 import './Projects.css';
 const Projects = () => {
   const [activeFilter, setActiveFilter] = useState('All');
@@ -61,7 +56,7 @@ const Projects = () => {
       title: 'EEG Brain-health Patch',
       description: 'An innovative wearable EEG device for continuous brain health monitoring. Imperial Faculty of Natural Sciences finalist project.',
       tags: ['EEG', 'Machine Learning', 'Hardware', 'Signal Processing'],
-      image: anaImage,
+      image: '/astro-migration/images/Introducing ANA.webp',
       github: '#',
       demo: '/ana-proj', // internal demo link
       category: 'Neurotechnology',
@@ -71,7 +66,7 @@ const Projects = () => {
       title: 'Hackstarter EEG Prototype',
       description: 'A focus-tracking wearable device using EEG signals and machine learning algorithms to optimize cognitive performance.',
       tags: ['EEG', 'TensorFlow', 'Python', 'Embedded Systems'],
-      image: hackstarterImage,
+      image: '/astro-migration/images/hackstarter.webp',
       github: 'https://github.com/roidfree/focus-classifier',
       demo: '#',
       category: 'Neurotechnology'
@@ -81,7 +76,7 @@ const Projects = () => {
       title: 'Automated Cell Culture System',
       description: 'A robotic system for automating laboratory cell culture processes, increasing efficiency and reducing human error.',
       tags: ['Robotics', 'Python', 'Arduino', 'Lab Automation'],
-      image: cellsysImage,
+      image: '/astro-migration/images/Cellsys 2.webp',
       github: 'https://github.com/roidfree/Automated-Cell-Culture',
       demo: 'https://www.youtube.com/watch?v=CP_furnj_WU',
       category: 'Research'
@@ -101,7 +96,7 @@ const Projects = () => {
       title: 'Intention-Action Gap Analysis Tool',
       description: 'A research tool that analyzes behavioral patterns to identify gaps between stated intentions and actual actions.',
       tags: ['Data Analysis', 'Psychology', 'Python', 'Visualization'],
-      image: comingSoonImage,
+      image: '/astro-migration/images/coming-soon.webp',
       github: '#',
       demo: '#',
       category: 'Behavioral Science'
@@ -111,7 +106,7 @@ const Projects = () => {
       title: 'Imperial Neurotechnology Society',
       description: 'Founded and led the Imperial Neurotechnology Society, a student-run organization dedicated to promoting neurotechnology education and research at Imperial College London. First and largest in UK.',
       tags: ['Neurotechnology', 'Educational', 'Interactive', 'Neuroscience'],
-      image: teachingImage,
+      image: '/astro-migration/images/teaching.webp',
       github: '#',
       demo: 'https://iclneurotech.co.uk',
       category: 'Education'
