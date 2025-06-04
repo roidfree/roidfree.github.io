@@ -1,0 +1,70 @@
+/* Loading Spinner Component */
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.loading-container.full-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(10, 25, 47, 0.9);
+  z-index: 9999;
+  backdrop-filter: blur(4px);
+}
+
+.loading-spinner {
+  position: relative;
+  border: 3px solid transparent;
+  border-radius: 50%;
+  border-top: 3px solid;
+  animation: spin 1s linear infinite;
+  margin: 0 auto;
+}
+
+.spinner-inner {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 70%;
+  height: 70%;
+  border-radius: 50%;
+  border: 3px solid transparent;
+  border-top-color: inherit;
+  opacity: 0.6;
+  animation: spin 0.8s linear infinite reverse;
+}
+
+.loading-message {
+  margin-top: 1.5rem;
+  color: var(--text-lighter, #8892b0);
+  font-size: 1.1rem;
+  text-align: center;
+  max-width: 200px;
+  line-height: 1.5;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Optional: Add some predefined color variants */
+:root {
+  --primary-color: #0066CC;
+  --secondary-color: #00A3E0;
+  --accent-color: #00D1B2;
+  --success-color: #28a745;
+  --danger-color: #dc3545;
+  --warning-color: #ffc107;
+  --info-color: #17a2b8;
+  --light-color: #f8f9fa;
+  --dark-color: #343a40;
+}
