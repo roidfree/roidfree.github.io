@@ -1,0 +1,36 @@
+---
+// filepath: c:\Users\calli\Documents\Projects\roidfree.github.io\astro-migration\src\pages\index.astro
+import Header from '../components/00_Header/header.jsx';
+import Hero from '../components/01_Hero/Hero.jsx';
+import About from '../components/02_About/about.jsx';
+import Projects from '../components/04_Projects/Projects.jsx';
+import Footer from '../components/06_Footer/footer.jsx';
+import LoadingSpinner from '../components/common/LoadingSpinner.jsx';
+---
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Landing Page</title>
+  </head>
+  <body>
+    <Header />
+
+    <main>
+      <Hero client:load />
+      <About client:load />
+      
+      <section id="projects">
+        <astro-island>
+          <Projects client:load />
+        </astro-island>
+      </section>
+      
+      <!-- Uncomment if Contact is needed -->
+      <!-- <Contact id="contact" /> -->
+    </main>
+
+    <Footer />
+  </body>
+</html>
