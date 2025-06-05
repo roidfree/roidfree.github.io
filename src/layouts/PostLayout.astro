@@ -1,0 +1,117 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import FormattedDate from '../components/FormattedDate.astro';
+
+const { frontmatter } = Astro.props;
+
+const dateStr = new Date(frontmatter.publish_date || frontmatter.created_time).toLocaleString("en-US", {
+  month: "short",
+  day: "numeric",
+  year: "numeric",
+});
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <BaseHead title={frontmatter.title} description={frontmatter.description} />
+  </head>
+  <body>
+    <Header />
+    <main>
+      <article>
+        <div class="hero-image">
+          {frontmatter.cover && (
+            <img width={1020} height={510} src={frontmatter.cover} alt={frontmatter.title} />
+          )}
+        </div>
+        <div class="prose">
+          <div class="title">
+            <div class="date">
+              <FormattedDate date={new Date(frontmatter.publish_date || frontmatter.created_time)} />
+            </div>
+            <h1>{frontmatter.title}</h1>
+            {frontmatter.description && <p class="description">{frontmatter.description}</p>}
+            {frontmatter.reading_time && <p class="reading-time">{frontmatter.reading_time}</p>}
+            {frontmatter.tags && frontmatter.tags.length > 0 && (
+              <div class="tags">
+                {frontmatter.tags.map((tag: any) => (
+                  <span class="tag">{tag.name}</span>
+                ))}
+              </div>
+            )}
+          </div>
+          <hr />
+          <slot />
+        </div>
+      </article>
+    </main>
+    <Footer />
+  </body>
+</html>
+
+<style>
+  main {
+    width: calc(100% - 2em);
+    max-width: 100%;
+    margin: 0;
+  }
+  .hero-image {
+    width: 100%;
+  }
+  .hero-image img {
+    display: block;
+    margin: 0 auto;
+    border-radius: 12px;
+    box-shadow: var(--box-shadow);
+  }
+  .prose {
+    width: 720px;
+    max-width: calc(100% - 2em);
+    margin: auto;
+    padding: 1em;
+    color: rgb(var(--gray-dark));
+  }
+  .title {
+    margin-bottom: 1em;
+    padding: 1em 0;
+    text-align: center;
+    line-height: 1;
+  }
+  .title h1 {
+    margin: 0 0 0.5em 0;
+  }
+  .date {
+    margin-bottom: 0.5em;
+    color: rgb(var(--gray));
+  }
+  .description {
+    font-size: 1.2em;
+    color: rgb(var(--gray));
+    margin: 0.5em 0;
+  }
+  .reading-time {
+    font-size: 0.9em;
+    color: rgb(var(--gray));
+    margin: 0.5em 0;
+  }
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5em;
+    justify-content: center;
+    margin: 1em 0;
+  }
+  .tag {
+    background: rgb(var(--accent));
+    color: white;
+    padding: 0.25em 0.5em;
+    border-radius: 4px;
+    font-size: 0.8em;
+  }
+  .last-updated-on {
+    font-style: italic;
+  }
+</style>

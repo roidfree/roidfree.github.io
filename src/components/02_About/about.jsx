@@ -38,7 +38,7 @@ const About = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <img src="/astro-migration/favicon.png" alt="Neurotechnology" className="about-image" />
+            <img src="/favicon.png" alt="Neurotechnology" className="about-image" />
           </motion.div>
           <div className="about-text">
             <h2>About Me</h2>

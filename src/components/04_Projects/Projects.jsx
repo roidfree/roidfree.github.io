@@ -56,7 +56,7 @@ const Projects = () => {
       title: 'EEG Brain-health Patch',
       description: 'An innovative wearable EEG device for continuous brain health monitoring. Imperial Faculty of Natural Sciences finalist project.',
       tags: ['EEG', 'Machine Learning', 'Hardware', 'Signal Processing'],
-      image: '/astro-migration/images/Introducing ANA.webp',
+      image: 'src/assets/images/Introducing ANA.webp',
       github: '#',
       demo: '/ana-proj', // internal demo link
       category: 'Neurotechnology',
@@ -66,7 +66,7 @@ const Projects = () => {
       title: 'Hackstarter EEG Prototype',
       description: 'A focus-tracking wearable device using EEG signals and machine learning algorithms to optimize cognitive performance.',
       tags: ['EEG', 'TensorFlow', 'Python', 'Embedded Systems'],
-      image: '/astro-migration/images/hackstarter.webp',
+      image: '/src/assets/images/hackstarter.webp',
       github: 'https://github.com/roidfree/focus-classifier',
       demo: '#',
       category: 'Neurotechnology'
@@ -76,7 +76,7 @@ const Projects = () => {
       title: 'Automated Cell Culture System',
       description: 'A robotic system for automating laboratory cell culture processes, increasing efficiency and reducing human error.',
       tags: ['Robotics', 'Python', 'Arduino', 'Lab Automation'],
-      image: '/astro-migration/images/Cellsys 2.webp',
+      image: '/src/assets/images/Cellsys 2.webp',
       github: 'https://github.com/roidfree/Automated-Cell-Culture',
       demo: 'https://www.youtube.com/watch?v=CP_furnj_WU',
       category: 'Research'
@@ -96,7 +96,7 @@ const Projects = () => {
       title: 'Intention-Action Gap Analysis Tool',
       description: 'A research tool that analyzes behavioral patterns to identify gaps between stated intentions and actual actions.',
       tags: ['Data Analysis', 'Psychology', 'Python', 'Visualization'],
-      image: '/astro-migration/images/coming-soon.webp',
+      image: 'src/assets/images/coming-soon.webp',
       github: '#',
       demo: '#',
       category: 'Behavioral Science'
@@ -106,7 +106,7 @@ const Projects = () => {
       title: 'Imperial Neurotechnology Society',
       description: 'Founded and led the Imperial Neurotechnology Society, a student-run organization dedicated to promoting neurotechnology education and research at Imperial College London. First and largest in UK.',
       tags: ['Neurotechnology', 'Educational', 'Interactive', 'Neuroscience'],
-      image: '/astro-migration/images/teaching.webp',
+      image: 'src/assets/images/teaching.webp',
       github: '#',
       demo: 'https://iclneurotech.co.uk',
       category: 'Education'

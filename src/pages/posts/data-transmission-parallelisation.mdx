@@ -1,0 +1,93 @@
+---
+layout: "../../layouts/PostLayout.astro"
+id: "1fb9be39-c811-807f-b4a9-ec2f76939803"
+slug: "data-transmission-parallelisation"
+title: "Data Transmission & Parallelisation"
+cover: "/src/images/posts/a3ea2a71150442771a09d39aa4d3bf6de63f8a872895b8b325b5dbd85bd23980-cover.jpg"
+tags: [{"id":"CeyG","name":"Integration","color":"purple"},{"id":":}WM","name":"Analysis","color":"green"},{"id":"UJZf","name":"Research","color":"yellow"}]
+created_time: 2025-05-22T18:30:00.000Z
+last_edited_time: 2025-06-01T22:26:00.000Z
+icon: {"type":"external","external":{"url":"https://www.notion.so/icons/news_gray.svg"}}
+archived: false
+status: "Published"
+publish_date: 2025-05-24
+description: "A deep dive into various data visualization libraries and methods we're considering for the ANA Project, with examples of how they might enhance the portfolio presentation."
+reading_time: "4 min read"
+---
+import Image from '../../components/Image.astro';
+
+
+> 💡 _TL;DR ~ BLE + prebuilt profiles_ 
+
+
+# How are we transmitting the data?
+
+
+At first glance, transmitting EEG signals might seem straightforward—simply send the signal across, right? It's easy to overlook this step when focusing on the more intricate aspects of the ANA project. However, this seemingly simple task significantly impacts our project's overall efficiency and timeline upon closer analysis.
+
+
+## Importance of Parallelisation
+
+
+Like any robust development process, our goal is to minimize bottlenecks and streamline progress. Clarifying our data transmission protocol early is crucial because it allows maximum parallelisation in the development of the ANA system.
+
+
+### How does this help?
+
+
+Once the format and protocol for our input data (EEG signals) are clearly defined, our software development team can immediately begin building their components. Knowing the exact data format is essentially the first domino in our digital processing pipeline—it sets everything else into motion.
+
+
+Hardware tasks, like chip design and electrical prototyping, naturally take several weeks. Meanwhile, software development needs to progress concurrently to meet tight deadlines. Defining our data transmission approach early enables software teams to reliably start coding in parallel with hardware development.
+
+
+### Addressing Transfer Learning Concerns
+
+
+Our software development lead has raised legitimate concerns regarding potential issues arising from unforeseen challenges related to "transfer learning." His worry is that significant time and resources could be invested into building an inference or machine learning (ML) pipeline using publicly available data, only to find out later, once integrating data from our own BCI, that the model cannot be effectively transferred. This would force the team to rebuild the model from scratch—a valid and important concern.
+
+
+However, the key to resolving this isn't necessarily adjusting the ML algorithm itself—though some fine-tuning will inevitably be needed—but rather how the data is packaged and structured. Based on extensive research into similar, documented projects, we found there's typically a standard approach to packaging and structuring data effectively for transfer learning scenarios. Smarter and more experienced teams have tackled these exact challenges before, creating proven solutions that we can adopt. By clearly identifying our specific problems and leveraging established methodologies, we can significantly mitigate our software development lead's concerns.
+
+
+## What Are the Options?
+
+
+During my research, I came across a variety of technical terms: **BLE**, **I2C**, **UART**, and **GATT profiles**. It’s easy to fall down the rabbit hole—especially when you’re not entirely sure how each of these could apply to your specific project. Staying relevant becomes a challenge when everything sounds like it _might_ be important.
+
+
+<Image src="/images/posts/d65fe7b462277c62f386b6f616aca05ce1a183fc748020dd83496cb1c10530b0.png" />
+
+
+---
+
+
+## GATT Profiles & BLE
+
+
+One term that stood out to me—and that I spent more time looking into—was **custom GATT profiles**.
+
+
+We’ve most likely settled on using **Bluetooth Low Energy (BLE)** to transmit data. It’s low-power, widely supported, and well-suited for wearable applications like ours. 
+
+
+But after digging deeper, I realised that the direction I was heading didn’t really address my **main concern**, which was how to avoid wasting effort on machine learning pipelines that might not transfer well to our own EEG data. BLE and GATT were more about ensuring smooth communication between devices—not solving transfer learning issues.
+
+
+---
+
+
+## So What’s the Real Answer?
+
+
+What actually matters more is **how the data is structured and packaged**, regardless of the transmission method. I was overcomplicating things.
+
+
+EEG raw voltage data is typically transmitted as **signed 24-bit binary integers**—simple, standard, and widely accepted in the field. This is what our transmitter will send, and it’s what our host device will receive. Nothing fancy, just a consistent and reliable format.
+
+
+That said, **custom GATT profiles** are still something I’ll need to explore further. From what I’ve read, they can help optimise aspects like **power efficiency**, **data throughput**, and **packet structure**—which could be especially important for continuous EEG signal transmission in a low-power device like ours.
+
+Dameer
+
+

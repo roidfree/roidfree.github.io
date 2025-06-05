@@ -58,7 +58,7 @@ const Header = () => {
             <a href="#projects" onClick={(e) => scrollToSection(e, 'projects')}>Projects</a>
           </li>
           <li>
-            <a href="/ana-proj" onClick={() => setIsMenuOpen(false)}>ANA</a>
+            <a href="/posts/" onClick={() => setIsMenuOpen(false)}>ANA</a>
           </li>
           {/* Uncomment if needed */}
           {/* <li>

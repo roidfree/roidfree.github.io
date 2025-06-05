@@ -11,7 +11,7 @@ const __dirname = path.dirname(__filename); // Added to support __dirname in ESM
 // https://astro.build/config
 export default defineConfig({
     site: 'https://realdameer.com',
-    base: '/astro-migration',
+    base: '/.',
     trailingSlash: 'always',
     output: 'static',
     markdown: {

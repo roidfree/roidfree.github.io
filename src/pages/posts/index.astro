@@ -1,0 +1,162 @@
+<!-- src/pages/posts/index.astro -->
+---
+import BaseHead from '../../components/BaseHead.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { getCollection } from 'astro:content';
+
+// Get all posts from the posts directory
+let allPosts: any[] = [];
+try {
+  const globResult = await import.meta.glob('./*.mdx', { eager: true });
+  allPosts = Object.values(globResult);
+} catch (error) {
+  // No posts found, which is fine for initial setup
+  console.log('No posts found - this is expected before running syncc');
+}
+
+const posts = allPosts
+  .filter((post: any) => post.frontmatter?.status === 'published')
+  .sort((a: any, b: any) => new Date(b.frontmatter.publish_date || b.frontmatter.created_time).valueOf() - new Date(a.frontmatter.publish_date || a.frontmatter.created_time).valueOf());
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <BaseHead title="Blog Posts" description="All blog posts from Notion" />
+  </head>
+  <body>
+    <Header />
+    <main>
+      <section>
+        <h1>Blog Posts</h1>
+        <p>Posts synced from Notion</p>
+        
+        {posts.length === 0 ? (
+          <p>No posts found. Run <code>pnpm run sync:published</code> to sync posts from Notion.</p>
+        ) : (
+          <ul>
+            {posts.map((post) => (
+              <li>
+                <a href={`/posts/${post.frontmatter.slug}`}>
+                  <div class="post-card">
+                    {post.frontmatter.cover && (
+                      <img src={post.frontmatter.cover} alt={post.frontmatter.title} class="cover-image" />
+                    )}
+                    <div class="post-content">
+                      <h2>{post.frontmatter.title}</h2>
+                      {post.frontmatter.description && (
+                        <p class="description">{post.frontmatter.description}</p>
+                      )}
+                      <div class="meta">
+                        <time>{new Date(post.frontmatter.publish_date || post.frontmatter.created_time).toLocaleDateString()}</time>
+                        {post.frontmatter.reading_time && (
+                          <span class="reading-time">{post.frontmatter.reading_time}</span>
+                        )}
+                      </div>
+                      {post.frontmatter.tags && post.frontmatter.tags.length > 0 && (
+                        <div class="tags">
+                          {post.frontmatter.tags.map((tag: any) => (
+                            <span class="tag">{tag.name}</span>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </a>
+              </li>
+            ))}
+          </ul>
+        )}
+      </section>
+    </main>
+    <Footer />
+  </body>
+</html>
+
+<style>
+  main {
+    width: calc(100% - 2em);
+    max-width: 100%;
+    margin: 0;
+  }
+  section {
+    width: 720px;
+    max-width: calc(100% - 2em);
+    margin: auto;
+    padding: 1em;
+  }
+  h1 {
+    text-align: center;
+    margin-bottom: 1em;
+  }
+  ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+  }
+  .post-card {
+    display: flex;
+    gap: 1em;
+    padding: 1.5em;
+    border: 1px solid rgb(var(--gray-light));
+    border-radius: 8px;
+    transition: box-shadow 0.2s ease;
+  }
+  .post-card:hover {
+    box-shadow: var(--box-shadow);
+  }
+  .cover-image {
+    width: 150px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 4px;
+    flex-shrink: 0;
+  }
+  .post-content {
+    flex: 1;
+  }
+  .post-content h2 {
+    margin: 0 0 0.5em 0;
+    color: rgb(var(--black));
+  }
+  .description {
+    color: rgb(var(--gray-dark));
+    margin: 0 0 1em 0;
+  }
+  .meta {
+    display: flex;
+    gap: 1em;
+    font-size: 0.9em;
+    color: rgb(var(--gray));
+    margin-bottom: 1em;
+  }
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5em;
+  }
+  .tag {
+    background: rgb(var(--accent));
+    color: white;
+    padding: 0.25em 0.5em;
+    border-radius: 4px;
+    font-size: 0.8em;
+  }
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  @media (max-width: 768px) {
+    .post-card {
+      flex-direction: column;
+    }
+    .cover-image {
+      width: 100%;
+      height: 200px;
+    }
+  }
+</style>
