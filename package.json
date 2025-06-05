@@ -4,12 +4,11 @@
   "version": "0.0.1",
   "type": "module",
   "scripts": {
-    "dev": "bunx --bun astro dev",
-    "build": "bunx --bun astro build",
-    "preview": "bunx --bun astro preview",
-    "lint": "bunx --bun eslint .",
-    "install-deps": "bunx bun install",
-    "clean-install": "rm -rf node_modules bun.lock && bunx bun install"
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "lint": "eslint .",
+    "clean-install": "rm -rf node_modules pnpm-lock.yaml && pnpm install"
   },
   "dependencies": {
     "@astrojs/mdx": "^4.3.0",
@@ -44,9 +43,17 @@
     "eslint-plugin-react": "^7.35.0",
     "eslint-plugin-react-hooks": "^5.1.0-rc.0",
     "eslint-plugin-react-refresh": "^0.4.9",
+    "flowbite": "^2.5.2",
     "gh-pages": "^6.3.0",
     "globals": "^15.9.0",
+    "image-type": "^5.2.0",
+    "notion-to-md": "^3.1.1",
+    "reading-time": "^1.5.0",
+    "rimraf": "^6.0.1",
     "rollup-plugin-visualizer": "^5.14.0",
+    "sharp": "^0.33.5",
+    "tailwind-merge": "^2.5.4",
+    "tinycolor2": "^1.6.0",
     "vite": "^5.4.1"
   }
 }
