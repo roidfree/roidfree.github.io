@@ -12,7 +12,7 @@ export const fetchPosts = async () => {
   try {
     // For Netlify (production or dev), the endpoint is just 'posts' (the function name)
     // For regular local development, it's '/posts'
-    const endpoint = isProduction || isNetlifyDev ? 'posts' : '/posts';
+    const endpoint = isProduction || isNetlifyDev ? '/posts' : '/posts';
     console.log(`Fetching posts from: ${API_URL}${endpoint}`);
     const response = await fetch(`${API_URL}${endpoint}`);
     
