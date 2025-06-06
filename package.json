@@ -7,13 +7,23 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "netlify:dev": "netlify dev",
+    "netlify:build": "netlify build",
+    "netlify:deploy": "netlify deploy",
+    "test:function": "node --experimental-vm-modules netlify-function-test.js"
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
     "@fontsource/inter": "^5.2.5",
     "@heroicons/react": "^2.2.0",
+    "@notionhq/client": "^3.1.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
     "framer-motion": "^12.11.0",
+    "netlify-cli": "^21.6.0",
+    "node": "^22.16.0",
     "react": "^18.3.1",
     "react-calendar": "^5.1.0",
     "react-datepicker": "^8.3.0",
@@ -22,7 +32,8 @@
     "react-router-dom": "^7.6.0",
     "react-scroll": "^1.9.3",
     "react-toastify": "^11.0.5",
-    "react-type-animation": "^3.2.0"
+    "react-type-animation": "^3.2.0",
+    "serverless-http": "^3.2.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.9.0",

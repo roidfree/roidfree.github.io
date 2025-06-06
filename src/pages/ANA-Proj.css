@@ -31,14 +31,14 @@ main {
   justify-content: center;
   text-align: center;
   width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  gap: 1.5rem; /* Moderate spacing between elements */
+  max-width: 1400px;
+  margin: 0 auto; /* Moderate spacing between elements */
 }
 
 /* Top section with title and subtitle */
 .ana-header {
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
+  padding: 0 1.5rem;
 }
 
 .ana-title {
@@ -57,7 +57,9 @@ main {
 .ana-subtitle {
   font-size: clamp(1rem, 2vw, 1.25rem);
   opacity: 0.8;
-  max-width: 600px;
+  max-width: 800px;
+  line-height: 1.6;
+  margin: 0 auto;
 }
 
 /* Timer section - main focus */
@@ -70,40 +72,326 @@ main {
   flex: 1;
 }
 
+/* Posts section */
+.ana-posts-section {
+  width: 100%;
+  padding: 1rem 0 3rem;
+}
+
 /* Footer section with coming soon text */
 .ana-footer {
-  margin-top: 1rem;
+  margin-top: 1.2rem;
+  padding: 0 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .ana-coming-soon {
   font-family: 'Orbitron', sans-serif;
   font-size: clamp(1.2rem, 3vw, 2rem);
   padding: 0.5rem 2rem;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(75, 108, 183, 0.2); /* match .ana-title blue */
   border-radius: 8px;
-  background-color: rgba(0, 0, 0, 0.5);
+  background: linear-gradient(90deg, #4b6cb7 0%, #182848 100%); /* match .ana-title */
   text-transform: uppercase;
   letter-spacing: 2px;
+  display: inline-block;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 0.5rem;
+  text-align: center;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.ana-coming-soon span {
+  color: #1b1557;
+  font-weight: 600;
+}
+
+.ana-coming-soon-wrapper {
+  margin-top: -1.2rem;
+  margin-bottom: 0.5rem;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.ana-loop-btn {
+  margin-top: 1.2rem;
+  font-size: 1.1rem;
+  padding: 0.7rem 2.2rem;
+  background: linear-gradient(90deg, #4b6cb7 0%, #182848 100%);
+  color: #fff;
+  border: none;
+  border-radius: 2rem;
+  box-shadow: 0 2px 8px rgba(75, 108, 183, 0.15);
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 700;
+  letter-spacing: 1px;
+  transition: background 0.2s, transform 0.2s;
+}
+.ana-loop-btn:hover {
+  background: linear-gradient(90deg, #182848 0%, #4b6cb7 100%);
+  transform: translateY(-2px) scale(1.04);
+}
+
+.ana-modal-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  margin-top: 1rem;
+  align-items: stretch;
+  text-align: left;
+}
+
+.ana-modal-form label {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 0.3rem;
+  margin-left: 2px;
+  letter-spacing: 0.5px;
+}
+
+.ana-modal-form input,
+.ana-modal-form textarea {
+  width: 100%;
+  max-width: 100%;
+  border: 1.5px solid #232b47;
+  border-radius: 0.7rem;
+  padding: 0.7rem 1rem;
+  font-size: 1rem;
+  background: #101426;
+  color: #fff;
+  font-family: 'Orbitron', sans-serif;
+  outline: none;
+  transition: border 0.2s, background 0.2s;
+  box-shadow: 0 1px 4px rgba(75, 108, 183, 0.08);
+}
+
+.ana-modal-form input:focus,
+.ana-modal-form textarea:focus {
+  border: 1.5px solid #4b6cb7;
+  background: #181e36;
+}
+
+.ana-modal-form textarea {
+  resize: vertical;
+  min-height: 80px;
+  max-height: 200px;
+}
+
+.ana-modal-form button[type="submit"] {
+  background: linear-gradient(90deg, #4b6cb7 0%, #182848 100%);
+  color: #fff;
+  border: none;
+  border-radius: 2rem;
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 700;
+  letter-spacing: 1px;
+  padding: 0.7rem 2.2rem;
+  margin-top: 1rem;
+  transition: background 0.2s, transform 0.2s;
+  box-shadow: 0 2px 8px rgba(75, 108, 183, 0.15);
+  font-size: 1.1rem;
+  align-self: flex-end;
+}
+.ana-modal-form button[type="submit"]:hover {
+  background: linear-gradient(90deg, #182848 0%, #4b6cb7 100%);
+  transform: translateY(-2px) scale(1.04);
+}
+
+/* Modal close button style for consistency */
+.modal-close-btn {
+  margin-top: 1.5rem;
+  background: linear-gradient(90deg, #4b6cb7 0%, #182848 100%);
+  color: #fff;
+  border: none;
+  border-radius: 1rem;
+  padding: 0.5rem 1.5rem;
+  font-size: 1rem;
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.modal-close-btn:hover {
+  background: linear-gradient(90deg, #182848 0%, #4b6cb7 100%);
+}
+
+/* Subscribe section styles */
+.ana-subscribe-section {
+  margin: 1rem 1rem 2rem 1rem;
+  padding: 1.5rem 1rem 2.5rem 1rem;
+  max-width: 600px;
+  text-align: center;
+  border: rgb(41, 63, 110) 3px solid;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+.ana-subscribe-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 2.3rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 0.5rem;
+}
+.ana-subscribe-desc {
+  color: #bfc7d5;
+  font-size: 1.18rem;
+  margin-bottom: 2rem;
+  font-weight: 500;
+}
+.ana-subscribe-form {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+  justify-content: center;
+  align-items: center;
+}
+.ana-subscribe-input {
+  flex: 1;
+  height: 3.1rem;
+  border-radius: 0.7rem;
+  border: 1.5px solid #d1d5db;
+  padding: 0 1.2rem;
+  font-size: 1.1rem;
+  background: #fff;
+  color: #232b47;
+  box-shadow: 0 1px 4px rgba(75, 108, 183, 0.08);
+  transition: border 0.2s;
+}
+.ana-subscribe-input:focus {
+  border: 1.5px solid #4b6cb7;
+  outline: none;
+}
+.ana-subscribe-btn {
+  height: 3.1rem;
+  padding: 0 2.2rem;
+  border-radius: 0.7rem;
+  background: #3864e6;
+  color: #fff;
+  font-size: 1.15rem;
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 600;
+  border: 1.5px solid #232b47;
+  box-shadow: 0 2px 8px rgba(56, 100, 230, 0.10);
+  cursor: pointer;
+  transition: background 0.2s, border 0.2s;
+}
+.ana-subscribe-btn:hover {
+  background: #2747a6;
+  border: 1.5px solid #2747a6;
+}
+
+.section-divider {
+    height: 3px;
+    width: 80%;
+    margin: 3rem auto;
+    background: linear-gradient(90deg, #4b6cb7 0%, #182848 100%);
+    opacity: 0.8;
+}
+  .ana-posts-title {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+  .ana-posts-desc {
+    margin-bottom: 1.5rem;
+    text-align: center !important;
+  }
+@media (max-width: 1024px) {
+  .ana-proj {
+    padding: 80px 0 30px;
+  }
+  
+  .ana-header {
+    margin-bottom: 1.5rem;
+  }
+  
+  .ana-subtitle {
+    max-width: 600px;
+  }
 }
 
 @media (max-width: 768px) {
   .ana-proj {
-    padding: 80px 0 30px; /* Adjusted padding for mobile */
-  }
-  
-  .ana-content {
-    gap: 1rem;
+    padding: 70px 0 20px;
   }
   
   .ana-header {
-    margin-bottom: 0.5rem;
+    margin-bottom: 1.25rem;
+    padding: 0 1.25rem;
   }
   
-  .ana-timer-section {
-    padding: 1rem 0;
+  .ana-title {
+    font-size: clamp(1.75rem, 6vw, 2.5rem);
+  }
+  
+  .ana-subtitle {
+    font-size: 1rem;
+  }
+  
+  .ana-posts-section {
+    padding: 0.5rem 0 2rem;
+  }
+  .ana-posts-title {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+  .ana-posts-desc {
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+  .ana-footer {
+    margin-top: 1.5rem;
+  }
+  
+  .ana-coming-soon {
+    padding: 0.5rem 1.5rem;
+    font-size: 1.1rem;
+  }
+  
+  .ana-subscribe-section {
+    padding: 2rem 0 1rem 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .ana-proj {
+    padding: 60px 0 20px;
+  }
+  
+  .ana-header {
+    padding: 0 1rem;
+  }
+  
+  .ana-title {
+    font-size: 1.75rem;
+  }
+  
+  .ana-subtitle {
+    font-size: 0.95rem;
   }
   
   .ana-footer {
-    margin-top: 0.5rem;
+    margin-top: 1rem;
+  }
+  
+  .ana-coming-soon {
+    padding: 0.4rem 1.2rem;
+    font-size: 1rem;
+  }
+  
+  .ana-subscribe-section {
+    /* Added horizontal padding to avoid touching edges */
+    padding: 1.5rem 1rem 0.5rem 1rem;
   }
 }

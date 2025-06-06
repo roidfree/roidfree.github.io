@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { FaBrain, FaVideo, FaLightbulb } from 'react-icons/fa';
-import faviconImage from '@images/favicon.png';
+import faviconImage from '/favicon.png';
 import './about.css';
 import teachingImage from '@images/teaching.webp';
 
@@ -18,7 +18,7 @@ const About = () => {
       description: 'Creating compelling visual narratives that communicate complex ideas and inspire meaningful action.' 
     },
     { 
-      name: 'Behavioral Science', 
+      name: 'Behavioural Science', 
       icon: <FaLightbulb />, 
       description: 'Applying insights from psychology and neuroscience to bridge the gap between intention and action in everyday life.' 
     },
@@ -46,9 +46,9 @@ const About = () => {
           <div className="about-text">
             <h2>About Me</h2>
             <p>
-              Hello! I'm Dameer Ahmed, a Biomedical Technology student at Imperial College London, specializing in neurotechnology 
+              Hello! I'm Dameer Ahmed, a Biomedical Technology student at Imperial College London, specialising in neurotechnology 
               and brain-computer interfaces (BCIs). As a Sanofi Scholar and founder of Imperial's Neurotechnology Society, 
-              I combine engineering precision, neuroscience insights, and human-centered design in my research and projects.
+              I combine engineering precision, neuroscience insights, and human-centred design in my research and projects.
             </p>
             <p>
               My technical work spans from developing EEG brain-health wearables to creating automated laboratory systems. 
@@ -56,9 +56,9 @@ const About = () => {
               direct brain-computer interaction.
             </p>
             <p>
-              Beyond my academic pursuits, I'm deeply interested in videography, storytelling, and applying behavioral science 
+              Beyond my academic pursuits, I'm deeply interested in videography, storytelling, and applying behavioural science 
               to help people lead more fulfilling lives. I focus specifically on bridging the gap between intention and action—helping 
-              people translate their goals into consistent behaviors through insights from psychology and neuroscience.
+              people translate their goals into consistent behaviours through insights from psychology and neuroscience.
             </p>
           </div>
           
