@@ -99,5 +99,6 @@ public
 .yarn/install-state.gz
 .pnp.*
 
+
 # Local Netlify folder
 .netlify
