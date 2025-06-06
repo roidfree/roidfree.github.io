@@ -143,7 +143,7 @@ layout: "../../layouts/PostLayout.astro"
 id: "${page.id}"
 slug: "${page.slug}"
 title: "${page.title}"
-cover: "${coverFileName}"
+cover: "${coverFileName ? '/images/posts/' + coverFileName : ''}"
 tags: ${JSON.stringify(page.tags)}
 created_time: ${page.created_time}
 last_edited_time: ${page.last_edited_time}

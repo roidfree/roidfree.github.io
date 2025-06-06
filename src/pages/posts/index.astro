@@ -16,7 +16,7 @@ try {
 }
 
 const posts = allPosts
-  .filter((post: any) => post.frontmatter?.status === 'published')
+  .filter((post: any) => post.frontmatter?.status === 'Published')
   .sort((a: any, b: any) => new Date(b.frontmatter.publish_date || b.frontmatter.created_time).valueOf() - new Date(a.frontmatter.publish_date || a.frontmatter.created_time).valueOf());
 ---
 
@@ -25,7 +25,7 @@ const posts = allPosts
   <head>
     <BaseHead title="Blog Posts" description="All blog posts from Notion" />
   </head>
-  <body>
+  <body> 
     <Header />
     <main>
       <section>
