@@ -1,0 +1,21 @@
+{
+	"geolocation": {
+		"data": {
+			"city": "Kingston upon Thames",
+			"country": {
+				"code": "GB",
+				"name": "United Kingdom"
+			},
+			"subdivision": {
+				"code": "ENG",
+				"name": "England"
+			},
+			"timezone": "Europe/London",
+			"latitude": 51.3997,
+			"longitude": -0.2515,
+			"postalCode": "KT3"
+		},
+		"timestamp": 1749224785781
+	},
+	"siteId": "5e18c570-2c7a-4114-8bc0-8a2fe8da618f"
+}
