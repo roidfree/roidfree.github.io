@@ -38,7 +38,7 @@ const posts = allPosts
           <ul>
             {posts.map((post) => (
               <li>
-                <a href={`/posts/${post.frontmatter.slug}`}>
+                <a href={`/posts/${post.frontmatter.slug}/`}>
                   <div class="post-card">
                     {post.frontmatter.cover && (
                       <img src={post.frontmatter.cover} alt={post.frontmatter.title} class="cover-image" />
