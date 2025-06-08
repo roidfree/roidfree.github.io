@@ -1,6 +1,7 @@
 import { Client } from "@notionhq/client";
 import { NotionToMarkdown } from "notion-to-md";
 import fs from 'fs';
+import path from 'path';
 import readingTime from 'reading-time';
 import { config } from 'dotenv';
 import { parseArgs } from 'node:util';
@@ -14,19 +15,44 @@ const ARGUMENT_OPTIONS = {
     type: 'boolean',
     short: 'p'
   },
+  force: { // Force overwrite existing files
+    type: 'boolean',
+    short: 'f'
+  },
+  verbose: { // Verbose logging
+    type: 'boolean',
+    short: 'v'
+  }
 };
-const { values: { published } } = parseArgs({ options: ARGUMENT_OPTIONS });
+
+const { values: { published, force, verbose } } = parseArgs({ options: ARGUMENT_OPTIONS });
 const isPublished = !!published;
-console.log(`Syncing Published Only: ${isPublished}`)
+const forceOverwrite = !!force;
+const isVerbose = !!verbose;
+
+console.log(`Syncing Published Only: ${isPublished}`);
+console.log(`Force Overwrite: ${forceOverwrite}`);
+console.log(`Verbose Logging: ${isVerbose}`);
 
 // Load ENV Variables
 config();
-if (!process.env.NOTION_KEY || !process.env.DATABASE_ID) throw new Error("Missing Notion .env data")
-const NOTION_KEY = process.env.NOTION_KEY;
-const DATABASE_ID = process.env.DATABASE_ID; // TODO: Import from ENV
+if (!process.env.NOTION_KEY || !process.env.DATABASE_ID) {
+  throw new Error("Missing required environment variables: NOTION_KEY and DATABASE_ID");
+}
 
-const POSTS_PATH = `src/pages/posts`;
-const THROTTLE_DURATION = 334; // ms Notion API has a rate limit of 3 requests per second, so ensure that is not exceeded
+const NOTION_KEY = process.env.NOTION_KEY;
+const DATABASE_ID = process.env.DATABASE_ID;
+const POSTS_PATH = process.env.POSTS_PATH || `src/pages/posts`;
+const IMAGES_PATH = process.env.IMAGES_PATH || `./images`;
+const THROTTLE_DURATION = parseInt(process.env.THROTTLE_DURATION) || 334; // ms
+
+// Ensure directories exist
+if (!fs.existsSync(POSTS_PATH)) {
+  fs.mkdirSync(POSTS_PATH, { recursive: true });
+}
+if (!fs.existsSync(IMAGES_PATH)) {
+  fs.mkdirSync(IMAGES_PATH, { recursive: true });
+}
 
 const notion = new Client({
   auth: NOTION_KEY,
@@ -35,136 +61,271 @@ const notion = new Client({
   }
 });
 
+// Enhanced logging function
+function log(level, message, data = null) {
+  const timestamp = new Date().toISOString();
+  const prefix = `[${timestamp}] [${level.toUpperCase()}]`;
+  
+  if (level === 'debug' && !isVerbose) return;
+  
+  console.log(`${prefix} ${message}`);
+  if (data && isVerbose) {
+    console.log(JSON.stringify(data, null, 2));
+  }
+}
+
+// Error handling wrapper
+async function withErrorHandling(fn, context) {
+  try {
+    return await fn();
+  } catch (error) {
+    log('error', `Error in ${context}: ${error.message}`);
+    if (isVerbose) {
+      console.error(error.stack);
+    }
+    throw error;
+  }
+}
+
 // Notion Custom Block Transform START
 const n2m = new NotionToMarkdown({ notionClient: notion });
+
 n2m.setCustomTransformer("embed", async (block) => {
   const { embed } = block;
   if (!embed?.url) return "";
+  
+  // Sanitize URL for security
+  const sanitizedUrl = sanitizeUrl(embed.url);
+  const caption = embed.caption ? await n2m.blockToMarkdown(embed.caption) : '';
+  
   return `<figure>
-  <iframe src="${embed?.url}"></iframe>
-  <figcaption>${await n2m.blockToMarkdown(embed?.caption)}</figcaption>
+  <iframe src="${sanitizedUrl}" loading="lazy"></iframe>
+  ${caption ? `<figcaption>${caption}</figcaption>` : ''}
 </figure>`;
 });
 
 n2m.setCustomTransformer("image", async (block) => {
-  const { image, id } = block;
-  const imageUrl = image?.file?.url || image?.external?.url;
-  const imageFileName = sanitizeImageString(imageUrl.split('/').pop());
-  const filePath = await downloadImage(imageUrl, `./images/${imageFileName}`);
-  const fileName = filePath.split('/').pop();
+  return await withErrorHandling(async () => {
+    const { image, id } = block;
+    const imageUrl = image?.file?.url || image?.external?.url;
+    
+    if (!imageUrl) {
+      log('warn', `No image URL found for block ${id}`);
+      return '';
+    }
+    
+    const imageFileName = sanitizeImageString(imageUrl.split('/').pop());
+    const filePath = await downloadImage(imageUrl, `${IMAGES_PATH}/${imageFileName}`);
+    const fileName = filePath.split('/').pop();
 
-  return `<Image src="/images/posts/${fileName}" />`;
+    return `<Image src="/images/posts/${fileName}" alt="${image.caption?.[0]?.plain_text || ''}" />`;
+  }, `image transformer for block ${block.id}`);
 });
 
 n2m.setCustomTransformer("video", async (block) => {
   const { video } = block;
-  const { caption, type, external: { url: videoUrl } } = video;
+  if (!video?.external?.url) return '';
+  
+  const { caption, external: { url: videoUrl } } = video;
+  let url = sanitizeUrl(videoUrl);
 
-  let url = videoUrl;
-
-  if (url.includes('youtube.com')) {
-    if (url.includes('/watch')) {
-      // Youtube URLs with the /watch format don't work, need to be replaced with /embed
-      const videoId = url.split('&')[0].split('?v=')[1];
+  // Enhanced YouTube URL handling
+  if (url.includes('youtube.com') || url.includes('youtu.be')) {
+    let videoId;
+    
+    if (url.includes('youtu.be/')) {
+      videoId = url.split('youtu.be/')[1].split('?')[0];
+    } else if (url.includes('/watch')) {
+      videoId = url.split('&')[0].split('?v=')[1];
+    } else if (url.includes('/embed/')) {
+      // Already in embed format
+      return `<iframe width="100%" height="480" src="${url}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>`;
+    }
+    
+    if (videoId) {
       url = `https://www.youtube.com/embed/${videoId}`;
     }
   }
 
-  return `<iframe width="100%" height="480" src="${url}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>`
+  const captionText = caption ? await n2m.blockToMarkdown(caption) : '';
+  
+  return `<figure>
+  <iframe width="100%" height="480" src="${url}" title="Video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>
+  ${captionText ? `<figcaption>${captionText}</figcaption>` : ''}
+</figure>`;
 });
+
 // Notion Custom Block Transform END
 
-// Fetch Notion Posts from Database via Notion API
-const queryParams = {
-  database_id: DATABASE_ID,
-}
-
-if (isPublished) {
-  queryParams.filter = {
-    "and": [
+async function fetchNotionPages() {
+  const queryParams = {
+    database_id: DATABASE_ID,
+    sorts: [
       {
-        "property": "Status",
-        "status": {
-          equals: 'Published'
-        }
-      },
-      {
-        "property": "Initiative",
-        "multi_select": {
-          contains: 'ANA'
-        }
+        property: 'Publish Date',
+        direction: 'descending'
       }
     ]
+  };
+
+  if (isPublished) {
+    queryParams.filter = {
+      "and": [
+        {
+          "property": "Status",
+          "status": {
+            equals: 'Published'
+          }
+        },
+        {
+          "property": "Initiative",
+          "multi_select": {
+            contains: 'ANA'
+          }
+        }
+      ]
+    };
   }
+
+  return await withErrorHandling(async () => {
+    const response = await notion.databases.query(queryParams);
+    log('info', `Fetched ${response.results.length} pages from Notion`);
+    return response.results;
+  }, 'fetching Notion pages');
 }
 
-const databaseResponse = await notion.databases.query(queryParams);
-const { results } = databaseResponse;
-
-// Create Pages
-const pages = results.map((page) => {
+function createPageObject(page) {
   const { properties, cover, created_time, last_edited_time, icon, archived } = page;
-  const title = properties['Title']?.title?.[0]?.plain_text || 'Untitled'
-  const slug = properties?.slug?.rich_text?.[0]?.plain_text || sanitizeUrl(title)
+  const title = properties['Title']?.title?.[0]?.plain_text || 'Untitled';
+  const slug = properties?.slug?.rich_text?.[0]?.plain_text || sanitizeUrl(title);
 
-  console.info("Notion Page:", page);
+  log('debug', `Processing page: ${title}`, { pageId: page.id, slug });
+
+  // Extract clean tag names only
+  const tags = properties['Tags']?.multi_select?.map(tag => tag.name) || [];
+  
+  // Extract clean icon data
+  const cleanIcon = icon ? {
+    type: icon.type,
+    [icon.type]: icon[icon.type]
+  } : null;
 
   return {
     id: page.id,
-    title,
+    title: title.replace(/"/g, '\\"'), // Escape quotes in title
     type: page.object,
     cover: cover?.external?.url || cover?.file?.url || properties['Featured Image']?.url,
-    tags: properties['Tags']?.multi_select || [],
+    tags: tags,
     created_time,
     last_edited_time,
-    icon,
+    icon: cleanIcon,
     archived,
     status: properties['Status']?.status?.name,
     date: properties['Publish Date']?.date?.start,
-    description: properties['Summary']?.rich_text?.[0]?.plain_text || '',
+    description: (properties['Summary']?.rich_text?.[0]?.plain_text || '').replace(/"/g, '\\"'),
     slug,
+  };
+}
+
+async function processPage(page) {
+  const filePath = path.join(process.cwd(), POSTS_PATH, `${page.slug}.mdx`);
+  
+  // Check if file exists and skip if not forcing overwrite
+  if (fs.existsSync(filePath) && !forceOverwrite) {
+    log('info', `Skipping existing file: ${page.slug}.mdx (use --force to overwrite)`);
+    return;
   }
-});
 
-for (let page of pages) {
-  console.info("Fetching from Notion & Converting to Markdown: ", `${page.title} [${page.id}]`);
-  const mdblocks = await n2m.pageToMarkdown(page.id);
-  const { parent: mdString } = n2m.toMarkdownString(mdblocks);
+  log('info', `Processing: ${page.title} [${page.id}]`);
 
-  const estimatedReadingTime = readingTime(mdString || '').text;
+  return await withErrorHandling(async () => {
+    const mdblocks = await n2m.pageToMarkdown(page.id);
+    const { parent: mdString } = n2m.toMarkdownString(mdblocks);
 
-  // Download Cover Image
-  const coverFileName = page.cover ? await downloadImage(page.cover, { isCover: true }) : '';
-  console.log('Name of file path of cover image:', coverFileName); // coverFileName ? `/images/posts/${coverFileName}` : 'No cover image 
-  if (coverFileName) console.info("Cover image downloaded:", coverFileName)
+    if (!mdString || mdString.trim() === '') {
+      log('warn', `No content found for page ${page.id} (${page.title})`);
+      return;
+    }
 
-  // Generate page contents (frontmatter, MDX imports, + converted Notion markdown)
-  const pageContents = `---
+    const estimatedReadingTime = readingTime(mdString).text;
+
+    // Download Cover Image
+    let coverFileName = '';
+    if (page.cover) {
+      try {
+        const fullPath = await downloadImage(page.cover, { isCover: true });
+        // Extract relative path from project root
+        const projectRoot = process.cwd();
+        coverFileName = fullPath.replace(projectRoot, '').replace(/\\/g, '/');
+        // Keep slash
+        log('info', `Cover image downloaded: ${coverFileName}`);
+      } catch (error) {
+        log('warn', `Failed to download cover image for ${page.title}: ${error.message}`);
+      }
+    }
+
+    // Generate page contents with proper escaping
+    const pageContents = `---
 layout: "../../layouts/PostLayout.astro"
 id: "${page.id}"
 slug: "${page.slug}"
 title: "${page.title}"
-cover: "${coverFileName}"
-tags: ${JSON.stringify(page.tags)}
-created_time: ${page.created_time}
-last_edited_time: ${page.last_edited_time}
-icon: ${JSON.stringify(page.icon)}
+cover: "${coverFileName || ''}"
+tags: [${page.tags.map(tag => `"${tag}"`).join(', ')}]
+created_time: "${page.created_time}"
+last_edited_time: "${page.last_edited_time}"
+icon: ${page.icon ? JSON.stringify(page.icon) : 'null'}
 archived: ${page.archived}
-status: "${page.status}"
-publish_date: ${page.date ? page.date : false}
-description: "${page.description === 'undefined' ? '' : page.description}"
+status: "${page.status || ''}"
+publish_date: "${page.date || ''}"
+description: "${page.description}"
 reading_time: "${estimatedReadingTime}"
 ---
 import Image from '../../components/Image.astro';
 
 ${mdString}
-`
+`;
 
-  if (mdString) fs.writeFileSync(`${process.cwd()}/${POSTS_PATH}/${page.slug}.mdx`, pageContents);
-  else console.log(`No content for page ${page.id}`)
+    fs.writeFileSync(filePath, pageContents, 'utf8');
+    log('info', `Successfully created: ${page.slug}.mdx`);
 
-  console.debug(`Sleeping for ${THROTTLE_DURATION} ms...\n`)
-  await delay(THROTTLE_DURATION); // Need to throttle requests to avoid rate limiting
+  }, `processing page ${page.title}`);
 }
 
-console.info("Successfully synced posts with Notion")
+// Main execution
+async function main() {
+  try {
+    log('info', 'Starting Notion sync process...');
+    
+    const results = await fetchNotionPages();
+    const pages = results.map(createPageObject);
+    
+    log('info', `Processing ${pages.length} pages...`);
+    
+    let processed = 0;
+    let skipped = 0;
+    let errors = 0;
+
+    for (const page of pages) {
+      try {
+        await processPage(page);
+        processed++;
+      } catch (error) {
+        log('error', `Failed to process page ${page.title}: ${error.message}`);
+        errors++;
+      }
+
+      log('debug', `Throttling for ${THROTTLE_DURATION}ms...`);
+      await delay(THROTTLE_DURATION);
+    }
+
+    log('info', `Sync completed! Processed: ${processed}, Errors: ${errors}`);
+    log('info', 'Successfully synced posts with Notion');
+
+  } catch (error) {
+    log('error', `Fatal error during sync: ${error.message}`);
+    process.exit(1);
+  }
+}
+
+main();
