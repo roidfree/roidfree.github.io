@@ -135,6 +135,7 @@ for (let page of pages) {
 
   // Download Cover Image
   const coverFileName = page.cover ? await downloadImage(page.cover, { isCover: true }) : '';
+  console.log('Name of file path of cover image:', coverFileName); // coverFileName ? `/images/posts/${coverFileName}` : 'No cover image 
   if (coverFileName) console.info("Cover image downloaded:", coverFileName)
 
   // Generate page contents (frontmatter, MDX imports, + converted Notion markdown)
@@ -143,7 +144,7 @@ layout: "../../layouts/PostLayout.astro"
 id: "${page.id}"
 slug: "${page.slug}"
 title: "${page.title}"
-cover: "${coverFileName ? '/images/posts/' + coverFileName : ''}"
+cover: "${coverFileName}"
 tags: ${JSON.stringify(page.tags)}
 created_time: ${page.created_time}
 last_edited_time: ${page.last_edited_time}

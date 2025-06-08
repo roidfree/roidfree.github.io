@@ -55,7 +55,7 @@ html, body {
 }
 
 body {
-	font-family: 'Atkinson', sans-serif;
+	font-family: 'Inter', sans-serif;
 	margin: 0;
 	padding: 0;
 	text-align: left;
@@ -151,7 +151,7 @@ img {
 }
 code {
 	padding: 2px 5px;
-	background-color: rgb(var(--gray-light));
+	background-color: black;
 	border-radius: 2px;
 }
 pre {
