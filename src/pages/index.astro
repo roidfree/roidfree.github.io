@@ -15,17 +15,12 @@ import LoadingSpinner from '../components/common/LoadingSpinner.jsx';
     <title>Landing Page</title>
   </head>
   <body>
-    <Header />
+    <Header client:load />
 
     <main>
       <Hero client:load />
       <About client:load />
-      
-      <section id="projects">
-        <astro-island>
-          <Projects client:load />
-        </astro-island>
-      </section>
+      <Projects client:load />
       
       <!-- Uncomment if Contact is needed -->
       <!-- <Contact id="contact" /> -->

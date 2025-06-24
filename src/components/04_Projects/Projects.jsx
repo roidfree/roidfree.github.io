@@ -6,6 +6,13 @@ import { SiTensorflow, SiArduino, SiRaspberrypi } from 'react-icons/si';
 import { TbBrain, TbDeviceWatchStats, TbMicroscope } from 'react-icons/tb';
 import LoadingSpinner from '../common/LoadingSpinner';
 import './Projects.css';
+// images
+import anaImage from '../../assets/images/Introducing ANA.webp';
+import hackstarterImage from '../../assets/images/hackstarter.webp';
+import cellsysImage from '../../assets/images/Cellsys 2.webp';
+import comingSoonImage from '../../assets/images/coming-soon.webp';
+import teachingImage from '../../assets/images/teaching.webp';
+//
 const Projects = () => {
   const [activeFilter, setActiveFilter] = useState('All');
   const [isVisible, setIsVisible] = useState(false);
@@ -56,7 +63,7 @@ const Projects = () => {
       title: 'EEG Brain-health Patch',
       description: 'An innovative wearable EEG device for continuous brain health monitoring. Imperial Faculty of Natural Sciences finalist project.',
       tags: ['EEG', 'Machine Learning', 'Hardware', 'Signal Processing'],
-      image: 'src/assets/images/Introducing ANA.webp',
+      image: anaImage, // Use imported image
       github: '#',
       demo: '/ana-proj', // internal demo link
       category: 'Neurotechnology',
@@ -66,7 +73,7 @@ const Projects = () => {
       title: 'Hackstarter EEG Prototype',
       description: 'A focus-tracking wearable device using EEG signals and machine learning algorithms to optimize cognitive performance.',
       tags: ['EEG', 'TensorFlow', 'Python', 'Embedded Systems'],
-      image: '/src/assets/images/hackstarter.webp',
+      image: hackstarterImage,
       github: 'https://github.com/roidfree/focus-classifier',
       demo: '#',
       category: 'Neurotechnology'
@@ -76,7 +83,7 @@ const Projects = () => {
       title: 'Automated Cell Culture System',
       description: 'A robotic system for automating laboratory cell culture processes, increasing efficiency and reducing human error.',
       tags: ['Robotics', 'Python', 'Arduino', 'Lab Automation'],
-      image: '/src/assets/images/Cellsys 2.webp',
+      image: cellsysImage, 
       github: 'https://github.com/roidfree/Automated-Cell-Culture',
       demo: 'https://www.youtube.com/watch?v=CP_furnj_WU',
       category: 'Research'
@@ -86,17 +93,17 @@ const Projects = () => {
       title: '3D Robotic Arm',
       description: 'A 3D printed robotic arm inspired by surgical robots',
       tags: ['CAD', 'Electronics', 'Robotics', 'C++', 'Arduino'],
-      image: 'https://img.youtube.com/vi/EB8IfXXxCYQ/hqdefault.jpg',
+      image: {src: 'https://img.youtube.com/vi/EB8IfXXxCYQ/hqdefault.jpg'},
       github: 'https://github.com/roidfree/3D-printed-robotic-arm',
       demo: 'https://www.youtube.com/watch?v=EB8IfXXxCYQ',
       category: 'Neurotechnology'
     },
     {
       id: 5,
-      title: 'Intention-Action Gap Analysis Tool',
-      description: 'A research tool that analyzes behavioral patterns to identify gaps between stated intentions and actual actions.',
+      title: 'Cognitive Fatigue Workload Analysis Tool',
+      description: 'A focus-tracking suite, using a range of devices and machine learning to track and identify your focus and prevent burnout.',
       tags: ['Data Analysis', 'Psychology', 'Python', 'Visualization'],
-      image: 'src/assets/images/coming-soon.webp',
+      image: comingSoonImage, 
       github: '#',
       demo: '#',
       category: 'Behavioral Science'
@@ -106,7 +113,7 @@ const Projects = () => {
       title: 'Imperial Neurotechnology Society',
       description: 'Founded and led the Imperial Neurotechnology Society, a student-run organization dedicated to promoting neurotechnology education and research at Imperial College London. First and largest in UK.',
       tags: ['Neurotechnology', 'Educational', 'Interactive', 'Neuroscience'],
-      image: 'src/assets/images/teaching.webp',
+      image: teachingImage, 
       github: '#',
       demo: 'https://iclneurotech.co.uk',
       category: 'Education'
@@ -195,7 +202,15 @@ const Projects = () => {
                 transition={{ duration: 0.5, delay: index * 0.1 }}
               >
                 <div className="project-image">
-                  <img src={project.image} alt={project.title} />
+                  <img
+                   src={project.image.src}
+                   width={600}
+                   height={project.image.height}
+                   alt={project.title}
+                   loading="lazy"
+                   decoding="async"
+                   className="w-full h-auto object-cover rounded-lg"
+                    />
                   <div className="project-links">
                     {project.github && (
                       <a 

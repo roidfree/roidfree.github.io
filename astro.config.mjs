@@ -12,9 +12,9 @@ const __dirname = path.dirname(__filename); // Added to support __dirname in ESM
 // https://astro.build/config
 export default defineConfig({
     site: 'https://realdameer.com',
-    base: '/.',
-    trailingSlash: 'always',
+    base: '/',
     output: 'static',
+    trailingSlash: 'always',
     markdown: {
         syntaxHighlight: 'prism',
         shikiConfig: {
@@ -22,6 +22,7 @@ export default defineConfig({
             wrap: true,
         },
     },
+
     vite: {
       server: {
           fs: {
